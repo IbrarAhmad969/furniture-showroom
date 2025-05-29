@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+body{
+    font-family: "--font-roboto", sans-serif;
+    width: 100dvw;
+    overflow: hidden;
+}
+
+@theme{
+    --font-roboto: roboto, sans-serif;
+}
+
+@layer base{
+    @font-face {
+        font-family: "roboto";
+        src: url("./assets/fonts/RobotoCondensed-VariableFont_wght.ttf") format(".ttf");
+    }
+}
+
+@layer components{
+    .dropdown-btn {
+       @apply block w-full px-4 hover:text-blue-800 hover:cursor-pointer
+    }
+}
