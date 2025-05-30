@@ -1,8 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { MdOutlinePerson3 } from "react-icons/md";
 import { CiShoppingCart } from "react-icons/ci";
+import { MdPerson } from "react-icons/md";
+import { MdOutlinePersonAdd } from "react-icons/md";
+import { RiLogoutCircleLine } from "react-icons/ri";
+import { BsSun } from "react-icons/bs";
+import { BsMoon } from "react-icons/bs";
+import ThemeContext from "../context/ThemeContext";
+import NavLinks from "./NavLinks";
 
 const NavBar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -13,73 +20,42 @@ const NavBar = () => {
 
   const dropDownRef = useRef(null);
 
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
   useEffect(() => {
     if (isSearchOpen && inputRef.current) {
       inputRef.current.focus();
     }
   }, [isSearchOpen]);
 
-  useEffect(()=>{
-    function handleClickOutside(event){
-        if(dropDownRef.current && !dropDownRef.current.contains(event.target)){
-            setShowDropDown(false);
-        }
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropDownRef.current && !dropDownRef.current.contains(event.target)) {
+        setShowDropDown(false);
+      }
     }
     document.addEventListener("mousedown", handleClickOutside);
 
-    return ()=>{
-        document.removeEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
     };
-
   }, []);
 
-
-
   return (
-    <div className="px-10 bg-white shadow-2xl w-dvw h-[60px] flex items-center justify-between">
+    <div className="px-10 universal-shadow w-dvw h-[60px] flex items-center justify-between">
+
+      {/* logo */}
+
       <div>
-        <h1 className="text-3xl">Future</h1>
+        <h1 className="gradient-text text-4xl font-bold">Future.</h1>
       </div>
 
-      <div className="">
-        <ul className="flex  space-x-2">
-          <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) => (isActive ? "underline" : "")}
-            >
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/shop"
-              className={({ isActive }) => (isActive ? "underline" : "")}
-            >
-              Shop
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/blog"
-              className={({ isActive }) => (isActive ? "underline" : "")}
-            >
-              Blog
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/pages"
-              className={({ isActive }) => (isActive ? "underline" : "")}
-            >
-              Pages
-            </NavLink>
-          </li>
-        </ul>
-      </div>
+      {/* Nav Links  */}
+      <NavLinks></NavLinks>
+
+      {/* Right Buttons */}
 
       <div className="flex gap-x-2">
-        {/* Search Button/Input */}
         <div className="relative flex items-center w-6">
           {isSearchOpen ? (
             <input
@@ -102,7 +78,6 @@ const NavBar = () => {
 
         <div ref={dropDownRef} className="relative flex items-center gap-x-2">
           <button
-          
             className="relative z-30"
             onClick={() => setShowDropDown(!showDropDown)}
           >
@@ -113,8 +88,10 @@ const NavBar = () => {
           </button>
           {showDropDown && (
             <div
-              className="absolute right-0 mt-2 w-30 bg-white rounded-md shadow-lg z-10"
-              style={{ top: "100%", position: "absolute" }}
+              className={`${
+                theme == "light" ? "" : "border border-white shadow-white"
+              } absolute pt-3 pb-2 right-0 mt-2 w-30 rounded-md shadow-md z-10  `}
+              style={{ top: "100%", right: "0%", position: "absolute" }}
             >
               <button
                 className="dropdown-btn text-left"
@@ -123,7 +100,10 @@ const NavBar = () => {
                   setShowDropDown(false);
                 }}
               >
-                Login
+                <div className="flex items-center gap-2">
+                  <MdPerson />
+                  Login
+                </div>
               </button>
 
               <button
@@ -133,7 +113,10 @@ const NavBar = () => {
                   setShowDropDown(false);
                 }}
               >
-                Sign up
+                <div className="flex items-center gap-2">
+                  <MdOutlinePersonAdd />
+                  Sign up
+                </div>
               </button>
 
               <button
@@ -143,14 +126,25 @@ const NavBar = () => {
                   setShowDropDown(false);
                 }}
               >
-                Logout
+                <div className="flex items-center gap-2">
+                  <RiLogoutCircleLine />
+                  Logout
+                </div>
               </button>
             </div>
           )}
+          <button>
+            <CiShoppingCart
+              className="cursor-pointer"
+              size={24}
+            ></CiShoppingCart>
+          </button>
         </div>
 
-        <button>
-          <CiShoppingCart className="cursor-pointer" size={24}></CiShoppingCart>
+        {/* Theme Toggle */}
+
+        <button onClick={toggleTheme} className=" ml-4 cursor-pointer ">
+          {theme === "light" ? <BsMoon size={20} /> : <BsSun size={20} />}
         </button>
       </div>
     </div>

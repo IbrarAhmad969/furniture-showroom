@@ -15,10 +15,76 @@ body{
         font-family: "roboto";
         src: url("./assets/fonts/RobotoCondensed-VariableFont_wght.ttf") format(".ttf");
     }
+    body {
+    @apply transition-colors duration-300;
+    }
+
+  .light {
+    @apply bg-white text-black;
+  }
+
+  .dark {
+    @apply bg-black text-white;
+  }
 }
 
 @layer components{
     .dropdown-btn {
-       @apply block w-full px-4 hover:text-blue-800 hover:cursor-pointer
+       @apply block w-full px-4 hover:text-blue-400 hover:cursor-pointer
     }
 }
+@layer utilities{
+   
+    .shadow-light {
+    box-shadow: 0 25px 50px -12px rgba(255, 255, 255, 0.1);
+    }
+    .universal-shadow {
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15); /* Centered soft drop */
+  }
+
+  .dark .universal-shadow {
+    box-shadow: 0px 4px 20px rgba(255, 255, 255, 0.1); /* Light shadow for dark mode */
+  }
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(to right, #60a5fa, #a78bfa); /* blue to purple */
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    border-radius: 9999px;
+  }
+
+  .link-underline-active::after {
+    transform: scaleX(1);
+  }
+
+
+
+   .gradient-text {
+    @apply bg-gradient-to-r from-blue-800 via-blue-500 to-purple-900 bg-clip-text text-transparent;
+    background-size: 200% 200%;
+    animation: gradientMove 6s ease infinite;
+  }
+
+  @keyframes gradientMove {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+}
+
