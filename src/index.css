@@ -66,13 +66,22 @@ body{
     transform: scaleX(1);
   }
 
-
-
    .gradient-text {
     @apply bg-gradient-to-r from-blue-800 via-blue-500 to-purple-900 bg-clip-text text-transparent;
     background-size: 200% 200%;
     animation: gradientMove 6s ease infinite;
   }
+
+
+  @media (min-width:580px) {
+  .sm580\:block { display: block; }
+  .sm580\:inline-block { display: inline-block; }
+  .sm580\:inline { display: inline; }
+  .sm580\:flex { display: flex; }
+  .sm580\:inline-flex { display: inline-flex; }
+  .sm580\:grid { display: grid; }
+  .sm580\:hidden { display: none; }
+}
 
   @keyframes gradientMove {
     0% {

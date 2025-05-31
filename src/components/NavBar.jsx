@@ -1,6 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CiSearch } from "react-icons/ci";
 import { MdOutlinePerson3 } from "react-icons/md";
 import { CiShoppingCart } from "react-icons/ci";
 import { MdPerson } from "react-icons/md";
@@ -10,23 +9,17 @@ import { BsSun } from "react-icons/bs";
 import { BsMoon } from "react-icons/bs";
 import ThemeContext from "../context/ThemeContext";
 import NavLinks from "./NavLinks";
+import { GiHamburgerMenu } from "react-icons/gi";
+import Search from "./Search";
 
 const NavBar = () => {
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const inputRef = useRef(null);
-
   const [showDropDown, setShowDropDown] = useState(false);
   const navigate = useNavigate();
 
+  const [mobileMenu, setMobileMenu] = useState(false);
+
   const dropDownRef = useRef(null);
-
   const { theme, toggleTheme } = useContext(ThemeContext);
-
-  useEffect(() => {
-    if (isSearchOpen && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isSearchOpen]);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -43,38 +36,35 @@ const NavBar = () => {
 
   return (
     <div className="px-10 universal-shadow w-dvw h-[60px] flex items-center justify-between">
-
       {/* logo */}
 
+      <div className="flex sm580:hidden ">
+        <button onClick={() => setMobileMenu(!mobileMenu)}>
+          <GiHamburgerMenu />
+        </button>
+      </div>
+
       <div>
-        <h1 className="gradient-text text-4xl font-bold">Future.</h1>
+        <div>
+          {mobileMenu && (
+            <div className="fixed left-0 top-[60px] w-64 h-[calc(100vh-60px)] bg-white shadow-lg z-50 sm580:hidden">
+              <NavLinks mobile={true}/>
+            </div>
+          )}
+        </div>
+        <h1 className="gradient-text text-4xl font-bold ">Future.</h1>
       </div>
 
       {/* Nav Links  */}
-      <NavLinks></NavLinks>
+
+      <div className="hidden sm580:flex">
+        <NavLinks mobile={false} />
+      </div>
 
       {/* Right Buttons */}
 
       <div className="flex gap-x-2">
-        <div className="relative flex items-center w-6">
-          {isSearchOpen ? (
-            <input
-              ref={inputRef}
-              type="text"
-              autoFocus
-              placeholder="Search..."
-              className="absolute right-0  top-1/2 -translate-y-1/2 w-48 px-3 py-1 rounded-md border border-white bg-white text-black shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
-              onBlur={() => setIsSearchOpen(false)}
-            />
-          ) : (
-            <button onClick={() => setIsSearchOpen(true)}>
-              <CiSearch
-                className="cursor-pointer hover:text-gray-200 transition"
-                size={24}
-              />
-            </button>
-          )}
-        </div>
+        <Search />
 
         <div ref={dropDownRef} className="relative flex items-center gap-x-2">
           <button
