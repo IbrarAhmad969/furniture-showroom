@@ -1,7 +1,41 @@
 import { useContext } from "react";
 import ThemeContext from "../../context/ThemeContext";
+import AboutCard from "../AboutCard";
+import Button from "../buttons/Button";
 
 const Home = () => {
+  const logoName = [
+    {
+      name: "Tesla",
+      file: "logo1.png",
+      url: "#",
+    },
+    {
+      name: "ikea",
+      file: "logo2.png",
+      url: "#",
+    },
+    {
+      name: "best_buy",
+      file: "logo3.png",
+      url: "#",
+    },
+    {
+      name: "lorempizum",
+      file: "logo4.png",
+      url: "#",
+    },
+    {
+      name: "united",
+      file: "logo5.png",
+      url: "#",
+    },
+    {
+      name: "last",
+      file: "logo6.png",
+      url: "#",
+    },
+  ];
   return (
     // Main Section, parent of all.
     <main className="w-full min-h-screen p-10 pt-[60px] overflow-x-hidden">
@@ -18,14 +52,12 @@ const Home = () => {
           >
             Interior Needs
           </p>
-          <h1 className="text-center text-2xl font-bold  sm:w-100 sm:text-start">
+          <h1 className="text-center text-2xl sm:text-4xl font-bold  sm:w-100 sm:text-start">
             Various <span className="text-blue-500">new collections</span> image
             of furniture to decorate the corner of your house.
           </h1>
 
-          <button className="px-15 py-4 text-blue-500 border-2 hover:cursor-pointer hover:text-blue-900">
-            Shope Now
-          </button>
+          <Button text="Shop Now" />
         </div>
 
         {/* right Div */}
@@ -33,6 +65,40 @@ const Home = () => {
           <img
             className={`w-full max-w-md h-auto object-contain rounded-lg`}
             src="/Images/furniture-logo.png"
+          />
+        </div>
+      </section>
+
+      {/* Logo Section  */}
+      <section className="mt-20 sm:grid gap-y-5">
+        <h3 className="text-center text-2xl font-bold mb-2.5">
+          Various brands have used our products
+        </h3>
+        <div className="bg-gray-400 rounded-2xl grid grid-cols-2 items-center justify-center sm:grid sm:grid-cols-6 sm:justify-center sm:items-center gap-3 ">
+          {logoName.map((logo, index) => (
+            <a
+              key={index}
+              href={logo.url}
+              target="_blank"
+              className="block mx-auto "
+            >
+              <img
+                src={`${"/logos/"}${logo.file}`}
+                alt={logo.name}
+                className="w-24 sm:w-28 md:w-32 h-auto object-contain transition-transform hover:scale-105"
+              />
+            </a>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <AboutCard
+            title="The Best Foam padded Chair"
+            image={`${"/Images/"}${"furniture-logo.png"}`}
+          />
+          <AboutCard
+            title="Latest model chandelier"
+            image={`${"/Images/"}${"chandelier.png"}`}
           />
         </div>
       </section>

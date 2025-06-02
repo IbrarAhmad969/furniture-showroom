@@ -1,16 +1,15 @@
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import NavBar from "../NavBar"
+import NavBar from "../NavBar";
 import Home from "./Home";
 import Blog from "./Blog";
 import Shop from "./Shop";
 import Pages from "./Pages";
 
-
 const Layout = () => (
   <>
     <NavBar />
     {/* The Children */}
-    <Outlet /> 
+    <Outlet />
   </>
 );
 
@@ -41,12 +40,8 @@ let routers = createBrowserRouter([
   },
 ]);
 
-
-
 const Routers = () => {
-  return (
-   <RouterProvider router={routers} />
-  )
-}
+  return <RouterProvider router={routers} />;
+};
 
-export default Routers
+export default Routers;

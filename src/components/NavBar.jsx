@@ -47,8 +47,12 @@ const NavBar = () => {
       <div>
         <div>
           {mobileMenu && (
-            <div className={`${theme=="light"? ("bg-white") : ("bg-black")} fixed overflow-y-auto left-0 top-[60px]  w-[80vw] max-w-[200px] h-[calc(100vh-60px)] universal-shadow z-50 sm580:hidden`}>
-              <NavLinks mobile={true}/>
+            <div
+              className={`${
+                theme == "light" ? "bg-white" : "bg-black"
+              } fixed overflow-y-auto left-0 top-[60px]  w-[80vw] max-w-[200px] h-[calc(100vh-60px)] universal-shadow z-50 sm580:hidden`}
+            >
+              <NavLinks mobile={true} />
             </div>
           )}
         </div>
