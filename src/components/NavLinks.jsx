@@ -1,7 +1,12 @@
 import { NavLink } from "react-router-dom";
 import Search from "./Search";
+import { useContext } from "react";
+import ThemeContext from "../context/ThemeContext";
 
 const NavLinks = ({ mobile }) => {
+
+  const {theme} = useContext(ThemeContext);
+  
   return (
     <div className={`${mobile ? "mt-10 px-4 " : ""}`}>
      <div className={`${mobile && ('mb-3.5 h-6')}`}>

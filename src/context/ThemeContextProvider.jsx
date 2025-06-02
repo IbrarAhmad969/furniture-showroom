@@ -6,12 +6,20 @@ const ThemeContextProvider = ({ children }) => {
 
   const toggleTheme = () => {
     setTheme((prev) => (prev == "light" ? "dark" : "light"));
-    console.log(theme);
   };
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    if (theme === "light") {
+      document.documentElement.classList.add("light");
+    } else {
+      document.documentElement.classList.remove("light");
+    }
 
-   useEffect(() => {
-    document.documentElement.className = theme;
-  }, [theme]);
+  }, [theme])
   
   return <ThemeContext value={{ theme, toggleTheme }}>{children}</ThemeContext>;
 };

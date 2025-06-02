@@ -1,61 +1,55 @@
 @import "tailwindcss";
+  @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
-body{
-    font-family: "--font-roboto", sans-serif;
-    width: 100dvw;
-    overflow: hidden;
-}
 
-@theme{
-    --font-roboto: roboto, sans-serif;
-}
-
-@layer base{
-    @font-face {
-        font-family: "roboto";
-        src: url("./assets/fonts/RobotoCondensed-VariableFont_wght.ttf") format(".ttf");
-    }
-    body {
-    @apply transition-colors duration-300;
-    }
-
-  .light {
-    @apply bg-white text-black;
+@layer base {
+  @font-face {
+    font-family: "roboto";
+    src: url("./assets/fonts/RobotoCondensed-VariableFont_wght.ttf")
+      format("truetype");
+  }
+  body {
+    @apply transition-colors duration-300 bg-white text-black dark:bg-black dark:text-white overflow-x-hidden;
+    font-family: "roboto", sans-serif;
   }
 
   .dark {
     @apply bg-black text-white;
   }
+
 }
 
-@layer components{
-    .dropdown-btn {
-       @apply block w-full px-4 hover:text-blue-400 hover:cursor-pointer
-    }
+@layer components {
+  .dropdown-btn {
+    @apply block w-full px-4 hover:text-blue-400 hover:cursor-pointer;
+  }
 }
-@layer utilities{
-   
-    .shadow-light {
+
+@layer utilities {
+  .shadow-light {
     box-shadow: 0 25px 50px -12px rgba(255, 255, 255, 0.1);
-    }
-    .universal-shadow {
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15); /* Centered soft drop */
+  }
+
+  .universal-shadow {
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
   }
 
   .dark .universal-shadow {
-    box-shadow: 0px 4px 20px rgba(255, 255, 255, 0.1); /* Light shadow for dark mode */
+    box-shadow: 0px 4px 20px rgba(255, 255, 255, 0.1);
   }
+
   .link-underline {
     position: relative;
   }
+
   .link-underline::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -4px;
     left: 0;
     height: 3px;
     width: 100%;
-    background: linear-gradient(to right, #60a5fa, #a78bfa); /* blue to purple */
+    background: linear-gradient(to right, #60a5fa, #a78bfa);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s ease;
@@ -66,22 +60,35 @@ body{
     transform: scaleX(1);
   }
 
-   .gradient-text {
+  .gradient-text {
     @apply bg-gradient-to-r from-blue-800 via-blue-500 to-purple-900 bg-clip-text text-transparent;
     background-size: 200% 200%;
     animation: gradientMove 6s ease infinite;
   }
 
-
-  @media (min-width:580px) {
-  .sm580\:block { display: block; }
-  .sm580\:inline-block { display: inline-block; }
-  .sm580\:inline { display: inline; }
-  .sm580\:flex { display: flex; }
-  .sm580\:inline-flex { display: inline-flex; }
-  .sm580\:grid { display: grid; }
-  .sm580\:hidden { display: none; }
-}
+  @media (min-width: 580px) {
+    .sm580\:block {
+      display: block;
+    }
+    .sm580\:inline-block {
+      display: inline-block;
+    }
+    .sm580\:inline {
+      display: inline;
+    }
+    .sm580\:flex {
+      display: flex;
+    }
+    .sm580\:inline-flex {
+      display: inline-flex;
+    }
+    .sm580\:grid {
+      display: grid;
+    }
+    .sm580\:hidden {
+      display: none;
+    }
+  }
 
   @keyframes gradientMove {
     0% {
@@ -94,6 +101,4 @@ body{
       background-position: 0% 50%;
     }
   }
-
 }
-

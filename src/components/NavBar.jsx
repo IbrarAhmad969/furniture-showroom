@@ -35,7 +35,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <div className="px-10 universal-shadow w-dvw h-[60px] flex items-center justify-between">
+    <div className="px-10 universal-shadow w-dvw h-[60px] flex items-center justify-between ">
       {/* logo */}
 
       <div className="flex sm580:hidden ">
@@ -47,7 +47,7 @@ const NavBar = () => {
       <div>
         <div>
           {mobileMenu && (
-            <div className="fixed left-0 top-[60px] w-64 h-[calc(100vh-60px)] bg-white shadow-lg z-50 sm580:hidden">
+            <div className={`${theme=="light"? ("bg-white") : ("bg-black")} fixed overflow-y-auto left-0 top-[60px]  w-[80vw] max-w-[200px] h-[calc(100vh-60px)] universal-shadow z-50 sm580:hidden`}>
               <NavLinks mobile={true}/>
             </div>
           )}
