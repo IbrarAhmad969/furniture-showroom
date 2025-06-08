@@ -102,6 +102,31 @@ const Home = () => {
           />
         </div>
       </section>
+
+      <section className="mt-20">
+        {/* Center Div */}
+        <div className=" flex flex-col sm:items-center items-start gap-3 mt-2">
+          <h1 className="text-3xl font-bold  ">Our Newest Product</h1>
+          <p className="w-60 text-gray-500 text-start sm:text-center mb-10">
+            Made of the best materials and with a design that follows the times
+          </p>
+        </div>
+        <div>
+          <div className="grid grid-cols-6 ">
+            <div className="overflow-hidden universal-shadow h-[400px] w-[300px] rounded-md relative sm:h-80 md:h-96">
+              <img
+                className="w-full h-full object-fill object-center rounded-md "
+                src="/public/Images/furniture1.jpg"
+                alt=""
+                srcset=""
+              />
+              <button className="absolute rounded-lg bottom-4 left-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 bg-blue-600 text-white px-6 py-2 shadow-md hover:bg-blue-700 transition">
+                Shop Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 };
