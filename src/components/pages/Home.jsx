@@ -1,7 +1,6 @@
-import { useContext } from "react";
-import ThemeContext from "../../context/ThemeContext";
 import AboutCard from "../AboutCard";
 import Button from "../buttons/Button";
+import Products from "../Products";
 
 const Home = () => {
   const logoName = [
@@ -111,19 +110,17 @@ const Home = () => {
             Made of the best materials and with a design that follows the times
           </p>
         </div>
-        <div>
-          <div className="grid grid-cols-6 ">
-            <div className="overflow-hidden universal-shadow h-[400px] w-[300px] rounded-md relative sm:h-80 md:h-96">
-              <img
-                className="w-full h-full object-fill object-center rounded-md "
-                src="/public/Images/furniture1.jpg"
-                alt=""
-                srcset=""
-              />
-              <button className="absolute rounded-lg bottom-4 left-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 bg-blue-600 text-white px-6 py-2 shadow-md hover:bg-blue-700 transition">
-                Shop Now
-              </button>
-            </div>
+        <div className="flex justify-center">
+          <div className="grid gap-6 grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] px-4">
+            <Products imageUrl={"/public/Images/product.png"} />
+            <Products imageUrl={"/public/Images/product-1.png"} />
+            <Products imageUrl={"/public/Images/product-2.png"} />
+            <Products imageUrl={"/public/Images/product-3.png"} />
+            <Products imageUrl={"/public/Images/product-4.png"} />
+            <Products imageUrl={"/public/Images/product-5.png"} />
+            <Products imageUrl={"/public/Images/product-6.png"} />
+            <Products imageUrl={"/public/Images/product-1.png"} />
+
           </div>
         </div>
       </section>
