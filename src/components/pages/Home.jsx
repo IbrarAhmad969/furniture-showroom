@@ -1,5 +1,6 @@
 import AboutCard from "../AboutCard";
 import Button from "../buttons/Button";
+import FooterGrid from "../footer/FooterGrid";
 import Subscribe from "../footer/Subscribe";
 import Products from "../Products";
 
@@ -133,7 +134,7 @@ const Home = () => {
       <footer className="p-2 w-[100%] universal-shadow">
         <Subscribe/>
         {/* Bottom Footer */}
-        {/* <div className="text-center py-4 bg-gray-400">Last footer Section</div> */}
+        <FooterGrid/>
       </footer>
     </div>
   );
