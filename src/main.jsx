@@ -4,16 +4,20 @@ import './index.css'
 import App from './App.jsx'
 import ThemeContextProvider from './context/ThemeContextProvider.jsx'
 import SearchContextProvider from './context/SearchContextProvider.jsx'
+import { Provider } from 'react-redux'
+import { store } from './redux/store.js'
 
 createRoot(document.getElementById('root')).render(
 
    
    <StrictMode>
-     <SearchContextProvider>
+     <Provider store={store} >
+      <SearchContextProvider>
       <ThemeContextProvider>
        <App />
      </ThemeContextProvider>
      </SearchContextProvider>
+     </Provider>
    </StrictMode>
  
 )

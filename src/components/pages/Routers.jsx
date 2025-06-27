@@ -4,6 +4,7 @@ import Home from "./Home";
 import Blog from "./Blog";
 import Shop from "./Shop";
 import Pages from "./Pages";
+import Cart from "../Cart";
 
 const Layout = () => (
   <>
@@ -35,6 +36,10 @@ let routers = createBrowserRouter([
       {
         path: "/pages",
         element: <Pages />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },

@@ -119,9 +119,7 @@ const Home = () => {
               filteredProducts.map((product, i) => (
                 <Products
                   key={i}
-                  imageUrl={product.imageUrl}
-                  name={product.name}
-                  description={product.description}
+                  product={product}
                 />
               ))
             ) : (
@@ -212,9 +210,7 @@ const Home = () => {
                     {filteredProducts.map((products, idx) => (
                       <Products
                         key={idx}
-                        imageUrl={products.imageUrl}
-                        name={products.name}
-                        description={products.description}
+                        product={products}
                       />
                     ))}
                   </div>

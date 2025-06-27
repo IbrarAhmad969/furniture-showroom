@@ -127,7 +127,12 @@ const NavBar = () => {
               </button>
             </div>
           )}
-          <button>
+          <button
+          onClick={()=>{
+            navigate("/cart")
+          }}
+          
+          >
             <CiShoppingCart
               className="cursor-pointer"
               size={24}
