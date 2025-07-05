@@ -12,6 +12,7 @@ import NavLinks from "./NavLinks";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Search from "./Search";
 
+
 const NavBar = () => {
   const [showDropDown, setShowDropDown] = useState(false);
   const navigate = useNavigate();
@@ -33,6 +34,8 @@ const NavBar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  
 
   return (
     <div className="px-10 universal-shadow w-dvw h-[60px] flex items-center justify-between ">
