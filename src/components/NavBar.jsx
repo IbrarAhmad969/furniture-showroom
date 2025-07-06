@@ -11,14 +11,20 @@ import ThemeContext from "../context/ThemeContext";
 import NavLinks from "./NavLinks";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Search from "./Search";
+import gsap from "gsap";
+import { useGSAP } from '@gsap/react';
 
+
+gsap.registerPlugin(useGSAP);
 
 const NavBar = () => {
+  const navBarRef = useRef()
+  const navBarLinks = useRef([]);
+
+
   const [showDropDown, setShowDropDown] = useState(false);
   const navigate = useNavigate();
-
   const [mobileMenu, setMobileMenu] = useState(false);
-
   const dropDownRef = useRef(null);
   const { theme, toggleTheme } = useContext(ThemeContext);
 
@@ -35,10 +41,28 @@ const NavBar = () => {
     };
   }, []);
 
+  useGSAP(()=>{
+    gsap.from(navBarRef.current, {
+      y: -100,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out"
+    });
+
+    // Animate links with stagger
+    gsap.from(navBarLinks.current, {
+      opacity: 0,
+      y: -20,
+      duration: 0.6,
+      stagger: 0.2,
+      delay: 0.5,
+      ease: "power2.out"
+    });
   
+  }, []);
 
   return (
-    <div className="px-10 universal-shadow w-dvw h-[60px] flex items-center justify-between ">
+    <div ref={navBarRef} className="static px-10 universal-shadow w-dvw h-[60px] flex items-center justify-between ">
       {/* logo */}
 
       <div className="flex sm580:hidden ">
@@ -55,7 +79,7 @@ const NavBar = () => {
                 theme == "light" ? "bg-white" : "bg-black"
               } fixed overflow-y-auto left-0 top-[60px]  w-[80vw] max-w-[200px] h-[calc(100vh-60px)] universal-shadow z-50 sm580:hidden`}
             >
-              <NavLinks mobile={true} />
+              <NavLinks mobile={true} linkRef={navBarLinks} />
             </div>
           )}
         </div>
@@ -65,7 +89,7 @@ const NavBar = () => {
       {/* Nav Links  */}
 
       <div className="hidden sm580:flex">
-        <NavLinks mobile={false} />
+        <NavLinks mobile={false} linkRef={navBarLinks} />
       </div>
 
       {/* Right Buttons */}

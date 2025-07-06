@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import AboutCard from "../AboutCard";
 import Button from "../buttons/Button";
 import FooterGrid from "../footer/FooterGrid";
@@ -6,8 +6,17 @@ import Subscribe from "../footer/Subscribe";
 import Products from "../Products";
 
 import SearchContext from "../../context/SearchContext";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(useGSAP);
+
 
 const Home = () => {
+  const leftBoxRef = useRef();
+  const rightBoxRef = useRef();
+
+
   const logoName = [
     {
       name: "Tesla",
@@ -106,6 +115,23 @@ const Home = () => {
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  useGSAP(()=>{
+    gsap.from(leftBoxRef.current, {
+    
+       opacity: 0,
+       duration: 1,
+       ease: "power3.out",
+       translateX: -200,
+    });
+    gsap.from(rightBoxRef.current, {
+      opacity: 0,
+      duration: 2,
+      ease: "bounce",
+      translateX: 200,
+
+    })
+  }, [])
+
   return (
     // Main Section, parent of all.
     <div className="">
@@ -134,7 +160,7 @@ const Home = () => {
               <section className="flex flex-col sm:flex-row sm:items-start sm:justify-between h-full ">
                 {/* left Div */}
 
-                <div
+                <div ref={leftBoxRef}
                   className="flex flex-col items-center gap-10
         sm:flex-col sm:items-start sm:justify-start sm:gap-10 mt-20
         "
@@ -156,6 +182,7 @@ const Home = () => {
                 {/* right Div */}
                 <div className="flex justify-center items-center mt-10 sm:w-1/2 w-full sm:h-full">
                   <img
+                    ref={rightBoxRef}
                     className={`w-full max-w-md h-auto object-contain rounded-lg`}
                     src="/Images/furniture-logo.png"
                   />

@@ -3,7 +3,7 @@ import Search from "./Search";
 import { useContext } from "react";
 import ThemeContext from "../context/ThemeContext";
 
-const NavLinks = ({ mobile }) => {
+const NavLinks = ({ mobile, linkRef }) => {
   const { theme } = useContext(ThemeContext);
 
   const links = [
@@ -34,9 +34,10 @@ const NavLinks = ({ mobile }) => {
         className={`sm:flex sm:flex-row sm580:flex sm580:flex-col sm580:gap-2 space-x-4 `}
       >
         {
-          links.map((link)=>(
+          links.map((link, i)=>(
             <li
             key={link.name}
+            ref={(el) => linkRef.current[i] = el}
           >
             <NavLink
               to={link.path}
