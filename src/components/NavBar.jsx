@@ -11,16 +11,17 @@ import ThemeContext from "../context/ThemeContext";
 import NavLinks from "./NavLinks";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Search from "./Search";
+import { useSelector } from "react-redux";
+import { selectCartTotal } from "../features/cart/cartSlice";
 import gsap from "gsap";
-import { useGSAP } from '@gsap/react';
-
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP);
 
 const NavBar = () => {
-  const navBarRef = useRef()
+  const navBarRef = useRef();
   const navBarLinks = useRef([]);
-
+  const total = useSelector(selectCartTotal);
 
   const [showDropDown, setShowDropDown] = useState(false);
   const navigate = useNavigate();
@@ -41,12 +42,12 @@ const NavBar = () => {
     };
   }, []);
 
-  useGSAP(()=>{
+  useGSAP(() => {
     gsap.from(navBarRef.current, {
       y: -100,
       opacity: 0,
       duration: 1,
-      ease: "power3.out"
+      ease: "power3.out",
     });
 
     // Animate links with stagger
@@ -56,13 +57,15 @@ const NavBar = () => {
       duration: 0.6,
       stagger: 0.2,
       delay: 0.5,
-      ease: "power2.out"
+      ease: "power2.out",
     });
-  
   }, []);
 
   return (
-    <div ref={navBarRef} className="static px-10 universal-shadow w-dvw h-[60px] flex items-center justify-between ">
+    <div
+      ref={navBarRef}
+      className="static px-10 universal-shadow w-dvw h-[60px] flex items-center justify-between "
+    >
       {/* logo */}
 
       <div className="flex sm580:hidden ">
@@ -154,16 +157,14 @@ const NavBar = () => {
               </button>
             </div>
           )}
-          <button
-          onClick={()=>{
-            navigate("/cart")
-          }}
-          
-          >
-            <CiShoppingCart
-              className="cursor-pointer"
-              size={24}
-            ></CiShoppingCart>
+          <button onClick={() => navigate("/cart")} className="relative">
+            <CiShoppingCart className="cursor-pointer" size={28} />
+            
+            {total > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-md">
+                {total}
+              </span>
+            )}
           </button>
         </div>
 

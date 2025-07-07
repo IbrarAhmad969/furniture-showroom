@@ -22,7 +22,10 @@ const Products = ({ product}) => {
       </div>
       <div className="mb-10 flex flex-col justify-between p-4 h-2/5">
         <div>
-          <h3 className="dark:text-white text-lg font-semibold text-gray-800 truncate">{product.name}</h3>
+          <div className='flex justify-between items-center'>
+            <h3 className="dark:text-white text-lg font-semibold text-gray-800 truncate">{product.name}</h3>
+            <h1 className='text-blue-500 font-bold' > RS {product.price}</h1>
+          </div>
           <p className="text-sm text-gray-500 mt-1 line-clamp-2 h-10">{product.description}</p>
         </div>
         <button

@@ -1,21 +1,24 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import AboutCard from "../AboutCard";
 import Button from "../buttons/Button";
 import FooterGrid from "../footer/FooterGrid";
 import Subscribe from "../footer/Subscribe";
 import Products from "../Products";
-
 import SearchContext from "../../context/SearchContext";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
+
 
 gsap.registerPlugin(useGSAP);
-
+gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
+
   const leftBoxRef = useRef();
   const rightBoxRef = useRef();
-
+  const scrollRef = useRef();
+  const scrollRefTwo = useRef();
 
   const logoName = [
     {
@@ -57,6 +60,7 @@ const Home = () => {
       id: 1,
       imageUrl: "Images/product.png",
       name: "Leather Chair",
+      price: "55000",
       description:
         "Sink into comfort with this plush velvet sofa — perfect for cozy evenings or classy hosting.",
     },
@@ -64,6 +68,7 @@ const Home = () => {
       id: 2,
       imageUrl: "Images/product-1.png",
       name: "Modern Chair",
+      price: "34000",
       description:
         "A sleek design that transforms into a comfy bed. Style and function? Yes, please.",
     },
@@ -71,6 +76,8 @@ const Home = () => {
       id: 3,
       imageUrl: "Images/product-2.png",
       name: "Lamp ",
+      price: "52000",
+
       description:
         "Retro meets modern in this three-seater beauty, crafted for lounging in style.",
     },
@@ -78,6 +85,8 @@ const Home = () => {
       id: 4,
       imageUrl: "Images/product-3.png",
       name: "Relax Sofa ",
+      price: "52130",
+
       description:
         "A bold statement piece that blends comfort and elegance for your reading nook or living space.",
     },
@@ -85,6 +94,8 @@ const Home = () => {
       id: 5,
       imageUrl: "Images/product-4.png",
       name: "Family Sofa",
+      price: "12000",
+
       description:
         "Designed to support your grind — comfy, breathable, and built for long hours of focus.",
     },
@@ -92,6 +103,8 @@ const Home = () => {
       id: 6,
       imageUrl: "Images/product-5.png",
       name: "Mini Bed",
+      price: "24000",
+
       description:
         "Minimalist vibes, maximum charm. These chairs upgrade any dinner setup effortlessly.",
     },
@@ -99,6 +112,8 @@ const Home = () => {
       id: 7,
       imageUrl: "Images/product-6.png",
       name: "Sheep Chair",
+      price: "10000",
+
       description:
         "A curated mix of comfort and style — everything you need to complete your dream space.",
     },
@@ -106,6 +121,8 @@ const Home = () => {
       id: 8,
       imageUrl: "Images/product-1.png",
       name: "White Chair",
+      price: "35000",
+
       description:
         "Handcrafted with natural wood grain finish, this table adds earthy charm to any room.",
     },
@@ -115,22 +132,71 @@ const Home = () => {
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  useGSAP(()=>{
+  useGSAP(() => {
+    const boxes = gsap.utils.toArray(scrollRef.current.children);
+    const productCards = gsap.utils.toArray(scrollRefTwo.current.children);
+
     gsap.from(leftBoxRef.current, {
-    
-       opacity: 0,
-       duration: 1,
-       ease: "power3.out",
-       translateX: -200,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out",
+      translateX: -200,
     });
     gsap.from(rightBoxRef.current, {
       opacity: 0,
       duration: 2,
       ease: "bounce",
       translateX: 200,
+    });
 
-    })
-  }, [])
+    boxes.forEach((box, i) => {
+      gsap.fromTo(
+        box,
+        {
+          y: 100,
+          opacity: 0,
+          scale: 0.9,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 1.2,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: box,
+            start: "top 90%",
+            end: "top 30%",
+            scrub: true,
+            toggleActions: "play none none reverse",
+          },
+          delay: i * 0.1,
+        }
+      );
+    });
+
+    productCards.forEach((product) => {
+      gsap.fromTo(
+        product,
+        { opacity: 0, filter: "blur(10px)", y: 30 },
+        {
+          opacity: 1,
+          filter: "blur(0px)",
+          y: 0,
+          duration: 1.2,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: product,
+            start: "top 90%",
+            end: "top 30%",
+            scrub: true,
+            toggleActions: "play none none reverse",
+          },
+          stagger: 0.2,
+        }
+      );
+    });
+  }, []);
 
   return (
     // Main Section, parent of all.
@@ -143,10 +209,7 @@ const Home = () => {
           <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {filteredProducts.length > 0 ? (
               filteredProducts.map((product, i) => (
-                <Products
-                  key={i}
-                  product={product}
-                />
+                <Products key={i} product={product} />
               ))
             ) : (
               <p className="p-5">No products match your search.</p>
@@ -160,7 +223,8 @@ const Home = () => {
               <section className="flex flex-col sm:flex-row sm:items-start sm:justify-between h-full ">
                 {/* left Div */}
 
-                <div ref={leftBoxRef}
+                <div
+                  ref={leftBoxRef}
                   className="flex flex-col items-center gap-10
         sm:flex-col sm:items-start sm:justify-start sm:gap-10 mt-20
         "
@@ -190,7 +254,7 @@ const Home = () => {
               </section>
 
               {/* Logo Section  */}
-              <section className="mt-20 sm:grid gap-y-5">
+              <section ref={scrollRef} className="mt-20 sm:grid gap-y-5">
                 <h3 className="text-center text-2xl font-bold mb-2.5">
                   Various brands have used our products
                 </h3>
@@ -232,13 +296,10 @@ const Home = () => {
                     the times
                   </p>
                 </div>
-                <div className="flex justify-center">
+                <div ref={scrollRefTwo} className="flex justify-center">
                   <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 px-4 max-w-screen-xl w-full">
                     {filteredProducts.map((products, idx) => (
-                      <Products
-                        key={idx}
-                        product={products}
-                      />
+                      <Products key={idx} product={products} />
                     ))}
                   </div>
                 </div>

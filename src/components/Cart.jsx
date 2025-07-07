@@ -9,7 +9,7 @@ const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
 
-  const total = cartItems.reduce(
+   const total = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
@@ -36,7 +36,7 @@ const Cart = () => {
             <div className="flex-1 space-y-1">
               <h3 className="text-lg font-semibold">{item.name}</h3>
               <p className="text-sm text-gray-600">{item.description}</p>
-              <p className="font-bold text-blue-600">${item.name}</p>
+              <p className="font-bold text-blue-600">${item.price}</p>
               <div className="flex items-center mt-2 gap-2">
                 <button
                   onClick={() => dispatch(decrementQuantity(item.id))}
