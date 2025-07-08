@@ -26,7 +26,7 @@ const Cart = () => {
         {cartItems.map((item) => (
           <div
             key={item.id}
-            className="flex flex-col sm:flex-row items-start sm:items-center border rounded-xl p-4 shadow-lg bg-white"
+            className="dark:bg-zinc-900 flex flex-col sm:flex-row items-start sm:items-center border rounded-xl p-4 shadow-lg bg-white"
           >
             <img
               src={item.imageUrl}
@@ -35,19 +35,19 @@ const Cart = () => {
             />
             <div className="flex-1 space-y-1">
               <h3 className="text-lg font-semibold">{item.name}</h3>
-              <p className="text-sm text-gray-600">{item.description}</p>
+              <p className="dark:text-gray-400 text-sm text-gray-600">{item.description}</p>
               <p className="font-bold text-blue-600">${item.price}</p>
               <div className="flex items-center mt-2 gap-2">
                 <button
                   onClick={() => dispatch(decrementQuantity(item.id))}
-                  className="px-2 py-1 text-lg font-bold bg-gray-200 rounded hover:bg-gray-300"
+                  className="dark:text-black px-2 py-1 text-lg font-bold bg-gray-200 rounded hover:bg-gray-600 hover:text-white hover:cursor-pointer"
                 >
                   −
                 </button>
                 <span className="font-medium">{item.quantity}</span>
                 <button
                   onClick={() => dispatch(addToCart(item))}
-                  className="px-2 py-1 text-lg font-bold bg-gray-200 rounded hover:bg-gray-300"
+                  className="dark:text-black px-2 py-1 text-lg font-bold bg-gray-200 rounded hover:bg-gray-600 hover:text-white hover:cursor-pointer"
                 >
                   +
                 </button>
