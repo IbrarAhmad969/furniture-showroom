@@ -5,6 +5,8 @@ import Blog from "./Blog";
 import Shop from "./Shop";
 import Pages from "./Pages";
 import Cart from "../Cart";
+import Login from "../Login";
+import SignUp from "../SignUp";
 
 const Layout = () => (
   <>
@@ -41,6 +43,16 @@ let routers = createBrowserRouter([
         path: "/cart",
         element: <Cart />,
       },
+      {
+        path: "/login", 
+        element: <Login/>
+
+      },
+      {
+        path: "/signUp",
+        element: <SignUp/>
+        
+      }
     ],
   },
 ]);

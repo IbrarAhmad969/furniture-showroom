@@ -23,6 +23,7 @@ const NavLinks = ({ mobile, linkRef }) => {
       name: "Pages",
       path: "/pages",
     },
+   
   ];
 
   return (
