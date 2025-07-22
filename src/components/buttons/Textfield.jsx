@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 
 const Textfield = ({placeholder, inpType, textFieldValue}) => {
@@ -10,7 +9,7 @@ const Textfield = ({placeholder, inpType, textFieldValue}) => {
   return (
     <div>
       <input
-        className="w-full mt-5 border rounded p-2.5 bg-white mb-6"
+        className="w-full mt-5 border rounded p-2.5 bg-white dark:bg-zinc-500 mb-6 dark:text-white text-zinc-900"
         type="text"
         placeholder={placeholder}
         {...register(`${textFieldValue}`, {
