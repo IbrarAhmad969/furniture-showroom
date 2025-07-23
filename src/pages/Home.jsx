@@ -1,10 +1,10 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import AboutCard from "../AboutCard";
-import Button from "../buttons/Button";
-import FooterGrid from "../footer/FooterGrid";
-import Subscribe from "../footer/Subscribe";
-import Products from "../Products";
-import SearchContext from "../../context/SearchContext";
+import AboutCard from "./AboutCard";
+import Button from "../components/buttons/Button";
+import FooterGrid from "../components/footer/FooterGrid";
+import Subscribe from "../components/footer/Subscribe";
+import Products from "../components/Products";
+import SearchContext from "../context/SearchContext";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";

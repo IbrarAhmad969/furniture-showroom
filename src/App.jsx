@@ -1,6 +1,5 @@
 import "./App.css";
-import Routers from "./components/pages/Routers";
-
+import Routers from "./routes/Routers"
 function App() {
   return (
     <div>

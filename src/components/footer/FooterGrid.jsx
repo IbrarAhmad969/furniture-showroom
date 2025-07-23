@@ -1,4 +1,3 @@
-import React from "react";
 import { FaYoutube, FaInstagram, FaFacebook, FaTiktok } from "react-icons/fa";
 
 const FooterGrid = () => {

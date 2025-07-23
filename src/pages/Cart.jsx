@@ -3,7 +3,7 @@ import {
   addToCart,
   removeFromCart,
   decrementQuantity,
-} from '../features/cart/cartSlice';
+} from '../state/features/cart/cartSlice';
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);

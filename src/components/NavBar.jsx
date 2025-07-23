@@ -12,9 +12,9 @@ import NavLinks from "./NavLinks";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Search from "./Search";
 import { useSelector } from "react-redux";
-import { selectCartTotal } from "../features/cart/cartSlice";
-import Login from "./Login";
-import Singup from "./SignUp"
+import { selectCartTotal } from "../state/features/cart/cartSlice";
+import Login from "../pages/Login";
+import Signup from "../pages/SignUp";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";

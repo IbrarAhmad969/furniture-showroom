@@ -3,6 +3,9 @@ import AuthHeader from "../components/auth/AuthHeader";
 import SocialAuthButton from "../components/auth/SocialAuthButton";
 import AuthForm from "../components/auth/AuthForm";
 
+import { signInWithEmailAndPassword } from "firebase/auth";
+import {auth} from "../firebase/firebase"
+
 const Login = () => {
   const fields = [
     {
@@ -19,9 +22,20 @@ const Login = () => {
     },
   ];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Logging in...");
+  const handleSubmit = async(data) => {
+   try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      data.email,
+      data.password,
+    
+    );
+    alert(`Welcome, ${userCredential.user.email}`);
+
+   } catch (error) {
+    console.log("Login Error: ", error.message)
+    alert("Invalid Credential");
+   }
   };
 
   return (
