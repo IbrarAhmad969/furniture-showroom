@@ -1,10 +1,14 @@
-import React from "react";
 import AuthLayout from "../components/auth/AuthLayout";
 import AuthHeader from "../components/auth/AuthHeader";
 import SocialAuthButton from "../components/auth/SocialAuthButton";
 import AuthForm from "../components/auth/AuthForm";
+import { useDispatch, useSelector } from "react-redux";
+import { signupUser } from "../state/features/auth/authSlice";
+
 
 const Signup = () => {
+  const dispatch = useDispatch();
+  const {loading, error, user } = useSelector((state)=>state.auth);
   const fields = [
     { label: "Full Name", placeholder: "John Doe", type: "text", name: "fullname" },
     { label: "Email", placeholder: "email@example.com", type: "email", name: "email" },
@@ -12,10 +16,9 @@ const Signup = () => {
     { label: "Confirm Password", placeholder: "Repeat your password", type: "password", name: "confirmPassword" },
   ];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // handle signup logic
-    console.log("Signing up...");
+  const handleSubmit = ({email, password}) => {
+     dispatch(signupUser({ email, password }));
+
   };
 
   return (
@@ -34,7 +37,7 @@ const Signup = () => {
           or
         </p>
       </div>
-      <AuthForm fields={fields} buttonText="Register" onSubmit={handleSubmit} />
+      <AuthForm fields={fields} buttonText={loading ? "Signing up..." : "Sign Up"} onSubmit={handleSubmit} />
     </AuthLayout>
   );
 };
