@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC3DBC9lWTLL5YA_M1AQ_uYGtT7ySloBoI",
-  authDomain: "furniture-showroom-ed91e.firebaseapp.com",
-  projectId: "furniture-showroom-ed91e",
-  storageBucket: "furniture-showroom-ed91e.firebasestorage.app",
-  messagingSenderId: "496168942120",
-  appId: "1:496168942120:web:19393f05acff6e7ebc931d"
+  apiKey: import.meta.env.VITE_REACT_APP_API_KEY,
+  authDomain: import.meta.env.VITE_REACT_APP_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_REACT_APP_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_REACT_APP_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_REACT_API_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
