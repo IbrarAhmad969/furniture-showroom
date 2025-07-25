@@ -20,6 +20,7 @@ export const signupUser = createAsyncThunk(
                  email: user.email,
             }
         } catch (error) {
+            
             return thunkAPI.rejectWithValue(error.message);
         }
     }
@@ -37,7 +38,7 @@ const authSlice = createSlice({
             state.loading = true,
             state.error = null
         }
-    },
+    }, 
     extraReducers: (builder) => {
     builder
       .addCase(signupUser.pending, (state) => {
