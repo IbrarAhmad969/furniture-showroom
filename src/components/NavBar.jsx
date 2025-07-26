@@ -13,8 +13,6 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import Search from "./Search";
 import { useSelector } from "react-redux";
 import { selectCartTotal } from "../state/features/cart/cartSlice";
-import Login from "../pages/Login";
-import Signup from "../pages/SignUp";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -67,34 +65,45 @@ const NavBar = () => {
   return (
     <div
       ref={navBarRef}
-      className="static px-10 universal-shadow w-dvw h-[60px] flex items-center justify-between "
+      className={`universal-shadow ${theme=="dark"? "nav-shadow" : ""} fixed top-0 left-0 right-0 px-4 sm:px-10 h-[60px] z-50 bg-white dark:bg-zinc-900 flex items-center justify-between`}
     >
       {/* logo */}
 
-      <div className="flex sm580:hidden ">
-        <button onClick={() => setMobileMenu(!mobileMenu)}>
-          <GiHamburgerMenu />
+      <div className="flex items-center gap-4 ">
+        {/* Mobile Menu Button - only visible on small screens */}
+        <button
+          onClick={() => setMobileMenu(!mobileMenu)}
+          className="sm580:hidden"
+        >
+          <GiHamburgerMenu size={24} />
         </button>
+
+        <h1
+          className="gradient-text text-2xl font-bold cursor-pointer"
+          onClick={() => navigate("/")}
+        >
+          Future.
+        </h1>
       </div>
 
       <div>
         <div>
           {mobileMenu && (
             <div
+              ref={dropDownRef}
               className={`${
-                theme == "light" ? "bg-white" : "bg-black"
-              } fixed overflow-y-auto left-0 top-[60px]  w-[80vw] max-w-[200px] h-[calc(100vh-60px)] universal-shadow z-50 sm580:hidden`}
+                theme === "light" ? "bg-white" : "bg-zinc-900"
+              } fixed top-[60px] left-0 w-[80vw] max-w-[250px] h-[calc(100vh-60px)] px-4 py-6 shadow-lg transition-all duration-300 z-40 sm580:hidden`}
             >
               <NavLinks mobile={true} linkRef={navBarLinks} />
             </div>
           )}
         </div>
-        <h1 className="gradient-text text-4xl font-bold ">Future.</h1>
       </div>
 
       {/* Nav Links  */}
 
-      <div className="hidden sm580:flex">
+      <div className="hidden sm580:flex absolute left-1/2 transform -translate-x-1/2">
         <NavLinks mobile={false} linkRef={navBarLinks} />
       </div>
 
@@ -116,7 +125,7 @@ const NavBar = () => {
           {showDropDown && (
             <div
               className={`${
-                theme == "light" ? "" : "border border-white shadow-white"
+                theme == "light" ? "bg-white shadow-black" : "border bg-zinc-800 border-white shadow-black"
               } absolute pt-3 pb-2 right-0 mt-2 w-30 rounded-md shadow-md z-10  `}
               style={{ top: "100%", right: "0%", position: "absolute" }}
             >
@@ -162,7 +171,7 @@ const NavBar = () => {
           )}
           <button onClick={() => navigate("/cart")} className="relative">
             <CiShoppingCart className="cursor-pointer" size={28} />
-            
+
             {total > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-md">
                 {total}

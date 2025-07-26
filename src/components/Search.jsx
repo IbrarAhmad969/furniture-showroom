@@ -44,8 +44,8 @@ const Search = ({ mobile }) => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onBlur={handleInputBlur}
-            className={`absolute right-0 top-1/2 -translate-y-1/2 w-48 px-3 py-1 rounded-md border border-white bg-white text-black shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all ${
-              mobile ? "left-0 top-1.5" : ""
+            className={`absolute right-0 top-1/2 -translate-y-1/2 min-w-[10rem] max-w-[12rem] w-full px-3 py-1 rounded-md border border-white bg-white text-black shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300 ease-in-out ${
+              mobile ? "left-0 top-1.5 right-auto" : ""
             }`}
           />
           {searchTerm && (

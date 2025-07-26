@@ -32,7 +32,7 @@ const NavLinks = ({ mobile, linkRef }) => {
         {mobile && <Search mobile={true} />}
       </div>
       <ul
-        className={`sm:flex sm:flex-row sm580:flex sm580:flex-col sm580:gap-2 space-x-4 `}
+        className={`sm:flex sm:flex-row sm580:flex sm580:flex-col sm580:gap-2 space-x-4`}
       >
         {
           links.map((link, i)=>(
@@ -46,7 +46,7 @@ const NavLinks = ({ mobile, linkRef }) => {
                 `link-underline ${
                   isActive
                     ? "link-underline-active text-blue-600"
-                    : "hover:text-blue-400 text-gray-600"
+                    : "hover:text-blue-400 text-gray-600 dark:text-white"
                 }`
               }
             >
