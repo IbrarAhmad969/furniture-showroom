@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Products from "../components/Products";
+import ShopProducts from "../components/ShopProducts";
 
 const Shop = () => {
   const buttons = ["Best Seller", "On Sale", "New Arrival", "Top Rated"];
@@ -81,7 +82,7 @@ const Shop = () => {
   
 
   return (
-    <div className=" w-screen h-screen pt-[60px]">
+    <div className=" w-screen min-h-screen pt-[60px]">
       <div className="flex flex-col m-5 dark:bg-zinc-900 bg-gray-100 h-full overflow-x-hidden">
         <h1 className="text-center text-3xl font-bold text-blue-900">
           Evaluate Your Space
@@ -104,9 +105,15 @@ const Shop = () => {
           ))}
         </div>
        
-        {/* //TODO: Products list */}
-        <div className="grid grid-cols-2 pt-10 gap-x-2">
-           
+        
+        <div className="grid grid-cols-2 mt-10 gap-x-2">
+           {
+            products.map((item, index)=> (
+              <div className="" key={index}>
+                <ShopProducts product={item}></ShopProducts>
+              </div>
+            ))
+           }
         </div>
       </div>
     </div>
