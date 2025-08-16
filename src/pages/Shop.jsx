@@ -2,6 +2,9 @@ import { useState } from "react";
 import Products from "../components/Products";
 import ShopProducts from "../components/ShopProducts";
 
+import Subscribe from "../components/footer/Subscribe";
+import FooterGrid from "../components/footer/FooterGrid";
+
 const Shop = () => {
   const buttons = ["Best Seller", "On Sale", "New Arrival", "Top Rated"];
   const [active, setIsActive] = useState(buttons[0]);
@@ -66,7 +69,7 @@ const Shop = () => {
       price: "10000",
 
       description:
-        "A curated mix of comfort and style — everything you need to complete your dream space.",
+        "A curated mix of comfort and style — everything you need to complete your dream space. ",
     },
     {
       id: 8,
@@ -83,7 +86,7 @@ const Shop = () => {
 
   return (
     <div className=" w-screen min-h-screen pt-[60px]">
-      <div className="flex flex-col m-5 dark:bg-zinc-900 bg-gray-100 h-full overflow-x-hidden">
+      <div className="p-2 rounded flex flex-col m-5 dark:bg-zinc-900 bg-gray-100 h-full overflow-x-hidden">
         <h1 className="text-center text-3xl font-bold text-blue-900">
           Evaluate Your Space
         </h1>
@@ -115,6 +118,12 @@ const Shop = () => {
             ))
            }
         </div>
+      </div>
+
+      <div className="m-5">
+        <Subscribe></Subscribe>
+
+        <FooterGrid></FooterGrid>
       </div>
     </div>
   );
