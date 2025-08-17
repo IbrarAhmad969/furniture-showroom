@@ -3,13 +3,13 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import NavBar from "../components/NavBar";
 
 import Home from "../pages/Home";
-import Blog from "../pages/Blog";
 import Shop from "../pages/Shop";
 import Pages from "../pages/Shop";
 import Cart from "../pages/Cart";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import ViewProductDetail from "../pages/ViewProductDetail";
+import FurnitureBlog from "../pages/FurnitureBlog";
 
 const Layout = () => (
   <>
@@ -36,7 +36,7 @@ let routers = createBrowserRouter([
       },
       {
         path: "/blog",
-        element: <Blog />,
+        element: <FurnitureBlog />,
       },
       {
         path: "/pages",
@@ -47,19 +47,18 @@ let routers = createBrowserRouter([
         element: <Cart />,
       },
       {
-        path: "/login", 
-        element: <Login/>
-
+        path: "/login",
+        element: <Login />,
       },
       {
         path: "/signUp",
-        element: <SignUp/>
-        
-      }, 
+        element: <SignUp />,
+      },
       {
-        path: "/viewProductDetails", 
-        element: <ViewProductDetail/>
-      }
+        path: "/viewProductDetails",
+        element: <ViewProductDetail />,
+      },
+     
     ],
   },
 ]);
