@@ -1,15 +1,19 @@
 import { useDispatch } from "react-redux";
 import { addToCart } from "../state/features/cart/cartSlice";
+import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
-const ShopProducts = ({ product }) => {
+const ShopProducts = ({ product, shopProduct = false }) => {
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const handleAddToCart = () => {
     dispatch(addToCart(product));
   };
 
   return (
-    <div className=" mt-10 ml-2 sm:h-[450px] dark:bg-zinc-900 group transition-transform duration-300 ease-in-out hover:scale-[1.02] hover:shadow-2xl w-full aspect-[3/4] bg-white flex flex-col overflow-hidden rounded-2xl border border-gray-200 shadow-md">
+    <div className=" mt-10 ml-2 sm:h-[450px] h-[500px] dark:bg-zinc-900 group transition-transform duration-300 ease-in-out hover:scale-[1.02] hover:shadow-2xl w-full aspect-[3/4] bg-white flex flex-col overflow-hidden rounded-2xl border border-gray-200 shadow-md">
       {/* Image */}
       <div className="relative w-full h-48 md:h-56 lg:h-64 overflow-hidden bg-gray-50">
         <img
@@ -33,12 +37,28 @@ const ShopProducts = ({ product }) => {
           </p>
         </div>
 
-        <button
-          onClick={handleAddToCart}
-          className="mt-4 cursor-pointer rounded-lg bg-blue-600 text-white px-4 py-2 shadow hover:bg-blue-700 transition-colors"
-        >
-          Add to Cart
-        </button>
+        <div className="flex sm:items-center flex-col sm:flex-row  justify-between gap-2">
+          <button
+            onClick={handleAddToCart}
+            className=" cursor-pointer rounded-lg bg-blue-600 text-white px-4 py-2 shadow hover:bg-blue-700 transition-colors"
+          >
+            Add to Cart
+          </button>
+          {shopProduct && (
+            <button
+              className="bg-green-400 cursor-pointer rounded-lg text-white px-4 py-2 shadow hover:bg-green-700 transition-colors"
+              onClick={() => {
+                navigate("/viewProductDetails", {
+                  state: {
+                    product: product,
+                  },
+                });
+              }}
+            >
+              Shop Now
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

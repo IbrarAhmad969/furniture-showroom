@@ -2,11 +2,9 @@ import AuthLayout from "../components/auth/AuthLayout";
 import AuthHeader from "../components/auth/AuthHeader";
 import SocialAuthButton from "../components/auth/SocialAuthButton";
 import AuthForm from "../components/auth/AuthForm";
-
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { useState } from "react";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {

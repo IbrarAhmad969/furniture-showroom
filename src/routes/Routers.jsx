@@ -9,6 +9,7 @@ import Pages from "../pages/Shop";
 import Cart from "../pages/Cart";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
+import ViewProductDetail from "../pages/ViewProductDetail";
 
 const Layout = () => (
   <>
@@ -54,6 +55,10 @@ let routers = createBrowserRouter([
         path: "/signUp",
         element: <SignUp/>
         
+      }, 
+      {
+        path: "/viewProductDetails", 
+        element: <ViewProductDetail/>
       }
     ],
   },

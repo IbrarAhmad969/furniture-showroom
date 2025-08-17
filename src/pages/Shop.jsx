@@ -113,7 +113,7 @@ const Shop = () => {
            {
             products.map((item, index)=> (
               <div className="" key={index}>
-                <ShopProducts product={item}></ShopProducts>
+                <ShopProducts product={item} shopProduct={true}></ShopProducts>
               </div>
             ))
            }

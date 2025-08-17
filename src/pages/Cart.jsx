@@ -15,12 +15,12 @@ const Cart = () => {
   );
 
   if (cartItems.length === 0) {
-    return <p className="p-6 text-lg font-medium">🛒 Your cart is empty!</p>;
+    return <p className="p-6 text-lg font-medium mt-16">Your cart is empty!</p>;
   }
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold mb-6">🛍 Your Shopping Cart</h2>
+      <h2 className="text-2xl font-bold mb-6 mt-16"> Your Shopping Cart</h2>
 
       <div className="space-y-6">
         {cartItems.map((item) => (
