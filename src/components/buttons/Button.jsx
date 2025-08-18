@@ -1,5 +1,3 @@
-import React from "react";
-
 const Button = ({ text,  width = "w-auto" }) => {
   return (
     <div>

@@ -20,8 +20,8 @@ const NavLinks = ({ mobile, linkRef }) => {
       path: "/blog",
     },
     {
-      name: "Pages",
-      path: "/pages",
+      name: "Contact",
+      path: "/contact",
     },
     
   ];

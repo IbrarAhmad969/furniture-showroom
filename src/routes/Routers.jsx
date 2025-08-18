@@ -4,10 +4,10 @@ import NavBar from "../components/NavBar";
 
 import Home from "../pages/Home";
 import Shop from "../pages/Shop";
-import Pages from "../pages/Shop";
 import Cart from "../pages/Cart";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
+import Contact from "../pages/Contact";
 import ViewProductDetail from "../pages/ViewProductDetail";
 import FurnitureBlog from "../pages/FurnitureBlog";
 
@@ -39,8 +39,8 @@ let routers = createBrowserRouter([
         element: <FurnitureBlog />,
       },
       {
-        path: "/pages",
-        element: <Pages />,
+        path: "/contact",
+        element: <Contact />,
       },
       {
         path: "/cart",
