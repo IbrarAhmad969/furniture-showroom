@@ -13,6 +13,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import Search from "./Search";
 import { useSelector } from "react-redux";
 import { selectCartTotal } from "../state/features/cart/cartSlice";
+import { useLocation } from "react-router-dom";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -43,6 +44,13 @@ const NavBar = () => {
     };
   }, []);
 
+  const location = useLocation();
+
+  useEffect(() => {
+    // whenever route changes, close sidebar
+    setMobileMenu(false);
+  }, [location]);
+
   useGSAP(() => {
     gsap.from(navBarRef.current, {
       y: -100,
@@ -65,7 +73,9 @@ const NavBar = () => {
   return (
     <div
       ref={navBarRef}
-      className={`universal-shadow ${theme=="dark"? "nav-shadow" : ""} fixed top-0 left-0 right-0 px-4 sm:px-10 h-[60px] z-50 bg-white dark:bg-zinc-900 flex items-center justify-between`}
+      className={`universal-shadow ${
+        theme == "dark" ? "nav-shadow" : ""
+      } fixed top-0 left-0 right-0 px-4 sm:px-10 h-[60px] z-50 bg-white dark:bg-zinc-900 flex items-center justify-between`}
     >
       {/* logo */}
 
@@ -80,7 +90,9 @@ const NavBar = () => {
 
         <h1
           className="gradient-text text-2xl font-bold cursor-pointer"
-          onClick={() => navigate("/")}
+          onClick={() => {
+            navigate("/");
+          }}
         >
           Future.
         </h1>
@@ -89,14 +101,26 @@ const NavBar = () => {
       <div>
         <div>
           {mobileMenu && (
-            <div
-              ref={dropDownRef}
-              className={`${
-                theme === "light" ? "bg-white" : "bg-zinc-900"
-              } fixed top-[60px] left-0 w-[80vw] max-w-[250px] h-[calc(100vh-60px)] px-4 py-6 shadow-lg transition-all duration-300 z-40 sm580:hidden`}
-            >
-              <NavLinks mobile={true} linkRef={navBarLinks} />
-            </div>
+            <>
+              <div
+                ref={dropDownRef}
+                className={`${
+                  theme === "light" ? "bg-white" : "bg-zinc-900"
+                } fixed top-[60px] left-0 w-[80vw] max-w-[250px] h-[calc(100vh-60px)] px-4 py-6 shadow-lg transition-all duration-300 z-50 sm580:hidden`}
+              >
+                <button
+                  className="absolute top-3 right-4 bg-black text-white universal-shadow border px-3 rounded-2xl dark:text-gray-300"
+                  onClick={() => setMobileMenu(false)}
+                >
+                  ✕
+                </button>
+                <NavLinks
+                  mobile={true}
+                  linkRef={navBarLinks}
+                  onLinkClicked={() => setMobileMenu(false)}
+                />
+              </div>
+            </>
           )}
         </div>
       </div>
@@ -125,7 +149,9 @@ const NavBar = () => {
           {showDropDown && (
             <div
               className={`${
-                theme == "light" ? "bg-white shadow-black" : "border bg-zinc-800 border-white shadow-black"
+                theme == "light"
+                  ? "bg-white shadow-black"
+                  : "border bg-zinc-800 border-white shadow-black"
               } absolute pt-3 pb-2 right-0 mt-2 w-30 rounded-md shadow-md z-10  `}
               style={{ top: "100%", right: "0%", position: "absolute" }}
             >

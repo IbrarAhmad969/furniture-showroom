@@ -3,7 +3,7 @@ import Search from "./Search";
 import { useContext } from "react";
 import ThemeContext from "../context/ThemeContext";
 
-const NavLinks = ({ mobile, linkRef }) => {
+const NavLinks = ({ mobile, linkRef, onLinkClick }) => {
   const { theme } = useContext(ThemeContext);
 
   const links = [
@@ -23,7 +23,6 @@ const NavLinks = ({ mobile, linkRef }) => {
       name: "Contact",
       path: "/contact",
     },
-    
   ];
 
   return (
@@ -34,12 +33,8 @@ const NavLinks = ({ mobile, linkRef }) => {
       <ul
         className={`sm:flex sm:flex-row sm580:flex sm580:flex-col sm580:gap-2 space-x-4`}
       >
-        {
-          links.map((link, i)=>(
-            <li
-            key={link.name}
-            ref={(el) => linkRef.current[i] = el}
-          >
+        {links.map((link, i) => (
+          <li key={link.name} ref={(el) => (linkRef.current[i] = el)}>
             <NavLink
               to={link.path}
               className={({ isActive }) =>
@@ -49,12 +44,16 @@ const NavLinks = ({ mobile, linkRef }) => {
                     : "hover:text-blue-400 text-gray-600 dark:text-white"
                 }`
               }
+              onClick={(e) => {
+                if (onLinkClick) {
+                  onLinkClick(); // close sidebar
+                }
+              }}
             >
               {link.name}
             </NavLink>
           </li>
-          ))
-        }
+        ))}
       </ul>
     </div>
   );
