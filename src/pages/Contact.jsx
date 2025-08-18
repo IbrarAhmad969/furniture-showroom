@@ -52,7 +52,7 @@ const Contact = () => {
           <label className="tracking-wide">Your Name</label>
           <input
             placeholder="Write your name here..."
-            className="border border-gray-300 rounded-lg p-3 outline-0 caret-gray-700"
+            className="border border-gray-300 rounded-lg p-3 outline-0 caret-gray-700 text-gray-500 dark:bg-zinc-800 dark:text-gray-400"
             {...register("UserName", {
               required: true,
               maxLength: 20,
@@ -62,7 +62,7 @@ const Contact = () => {
           <label>Your Email</label>
           <input
             placeholder="Write your email here..."
-            className="border border-gray-300 rounded-lg p-3 outline-0 caret-gray-700"
+            className="border border-gray-300 rounded-lg p-3 outline-0 caret-gray-700 text-gray-500 dark:bg-zinc-800 dark:text-gray-400"
             {...register("email", {
               required: true,
               pattern: /^[A-Za-z]+$/i,
@@ -74,7 +74,7 @@ const Contact = () => {
           <textarea
             rows={5}
             placeholder="Write your review here... "
-            className="border border-gray-300 rounded-lg p-3 outline-0 caret-gray-700 "
+            className="border border-gray-300 rounded-lg p-3 outline-0 caret-gray-700 text-gray-500 dark:bg-zinc-800 dark:text-gray-400 "
             {...register("message", {
               required: true,
               maxLength: 400,
@@ -87,7 +87,7 @@ const Contact = () => {
 
       {/* FAQ Section */}
       <div className="flex-1 max-w-2xl mx-auto sm:mx-0">
-        <h1 className="text-3xl font-bold text-center sm:text-left mb-8 text-gray-800">
+        <h1 className="text-3xl font-bold text-center sm:text-left mb-8 text-gray-800 dark:text-white">
           Frequently Asked Questions
         </h1>
 
