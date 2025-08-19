@@ -14,6 +14,7 @@ import Search from "./Search";
 import { useSelector } from "react-redux";
 import { selectCartTotal } from "../state/features/cart/cartSlice";
 import { useLocation } from "react-router-dom";
+import SearchContext from "../context/SearchContext";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -21,6 +22,11 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(useGSAP);
 
 const NavBar = () => {
+
+  // By Navigating, Search box carried a value, clear it. 
+  
+  const {searchTerm, setSearchTerm } = useContext(SearchContext);
+
   const navBarRef = useRef();
   const navBarLinks = useRef([]);
   const total = useSelector(selectCartTotal);
@@ -45,6 +51,11 @@ const NavBar = () => {
   }, []);
 
   const location = useLocation();
+
+  useEffect(()=>{
+    setSearchTerm("");
+  }, [location])
+
 
   useEffect(() => {
     // whenever route changes, close sidebar
@@ -134,7 +145,9 @@ const NavBar = () => {
       {/* Right Buttons */}
 
       <div className="flex gap-x-2">
-        <Search />
+        {(location.pathname === "/" || location.pathname === "/home ") && (
+          <Search />
+        )}
 
         <div ref={dropDownRef} className="relative flex items-center gap-x-2">
           <button

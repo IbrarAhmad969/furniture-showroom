@@ -3,6 +3,7 @@ import { useState, useEffect, useRef, useContext } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import SearchContext from "../context/SearchContext";
 
+
 const Search = ({ mobile }) => {
   const { searchTerm, setSearchTerm } = useContext(SearchContext);
   const [isSearchOpen, setIsSearchOpen] = useState(false);

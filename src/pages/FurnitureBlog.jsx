@@ -6,7 +6,7 @@ const blogPosts = [
     id: 1,
     title: "Top 5 Living Room Furniture Trends in 2025",
     date: "Aug 17, 2025",
-    imageUrl: "Images/product-3.png",
+    imageUrl: "Images/product-5.png",
     excerpt:
       "Discover the hottest trends in living room furniture this year — from cozy modular sofas to sustainable materials.",
   },
@@ -69,7 +69,7 @@ const FurnitureBlog = () => {
             key={post.id}
             className="bg-gray-100 dark:bg-zinc-900 rounded-2xl shadow hover:shadow-lg transition overflow-hidden flex flex-col"
           >
-            <div className="h-70 w-full overflow-hidden">
+            <div className="mt-2 h-70 w-full overflow-hidden">
               <img
                 src={post.imageUrl}
                 alt={post.title}

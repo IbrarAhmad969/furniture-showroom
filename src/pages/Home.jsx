@@ -8,13 +8,12 @@ import SearchContext from "../context/SearchContext";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
-
+import Search from "../components/Search";
 
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
-
   const leftBoxRef = useRef();
   const rightBoxRef = useRef();
   const scrollRef = useRef();
@@ -55,6 +54,7 @@ const Home = () => {
 
   // Centralized State for the Search Functionality
   const { searchTerm, setSearchTerm } = useContext(SearchContext);
+
   const products = [
     {
       id: 1,
@@ -203,7 +203,7 @@ const Home = () => {
     <div className="">
       {searchTerm ? (
         <>
-          <h2 className="text-2xl font-bold mb-4 p-5">
+          <h2 className="text-2xl font-bold mb-4 p-5 mt-16">
             Search Results for "{searchTerm}"
           </h2>
           <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
