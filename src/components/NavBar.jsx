@@ -18,6 +18,8 @@ import SearchContext from "../context/SearchContext";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { LogsIcon, PersonStanding, UserRound } from "lucide-react";
+import { BiChild } from "react-icons/bi";
 
 gsap.registerPlugin(useGSAP);
 
@@ -204,6 +206,18 @@ const NavBar = () => {
                 <div className="flex items-center gap-2">
                   <RiLogoutCircleLine />
                   Logout
+                </div>
+              </button>
+              <button
+                className="dropdown-btn text-left"
+                onClick={() => {
+                  navigate("/userPage");
+                  setShowDropDown(false);
+                }}
+              >
+                <div className="flex items-center gap-2">
+                  <UserRound className="cursor-pointer" size={18}/>
+                  Profile
                 </div>
               </button>
             </div>

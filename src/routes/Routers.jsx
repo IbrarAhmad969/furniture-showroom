@@ -10,6 +10,7 @@ import SignUp from "../pages/SignUp";
 import Contact from "../pages/Contact";
 import ViewProductDetail from "../pages/ViewProductDetail";
 import FurnitureBlog from "../pages/FurnitureBlog";
+import UserPage from "../pages/UserPage";
 
 const Layout = () => (
   <>
@@ -57,6 +58,10 @@ let routers = createBrowserRouter([
       {
         path: "/viewProductDetails",
         element: <ViewProductDetail />,
+      },
+      {
+        path: "/userPage",
+        element: <UserPage />,
       },
      
     ],
