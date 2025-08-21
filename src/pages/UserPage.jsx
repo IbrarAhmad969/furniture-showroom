@@ -32,7 +32,7 @@ const UserPage = () => {
 
   if (error)
     return (
-      <p className="text-center mt-10 text-red-500 font-semibold">{error}</p>
+      <p className="text-center mt-16 text-red-500 font-semibold">{error}</p>
     );
 
   return (
