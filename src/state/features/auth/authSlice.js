@@ -1,26 +1,25 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-
-import { auth } from "../../../firebase/firebase"
+import api from "../../../api/api";
 
 export const signupUser = createAsyncThunk(
     "auth/signupUser",
-    async ({ email, password }, thunkAPI) => {
+    async ({ name, role, email, password, avatar }, thunkAPI) => {
         try {
+            const formData = new FormData();
 
-            const userCredential = await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password,
+            formData.append("name", name);
+            formData.append("role", role);
+            formData.append("email", email);
+            formData.append("password", password);
+            if (avatar) formData.append("avatar", avatar);
+
+            const response = await api.post("/createUser",
+                formData,
             )
-            const user = userCredential.user
-           
-            return {
-                 uid: user.uid,
-                 email: user.email,
-            }
+
+            return response.data.data;
         } catch (error) {
-            
+
             return thunkAPI.rejectWithValue(error.message);
         }
     }
@@ -34,26 +33,27 @@ const authSlice = createSlice({
         error: null,
     },
     reducers: {
-        logout: (state)=>{
-            state.loading = true,
-            state.error = null
+        logout: (state) => {
+            state.user = null,
+                state.loading = false,
+                state.error = null
         }
-    }, 
+    },
     extraReducers: (builder) => {
-    builder
-      .addCase(signupUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(signupUser.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.loading = false;
-      })
-      .addCase(signupUser.rejected, (state, action) => {
-        state.error = action.payload;
-        state.loading = false;
-      });
-  },
+        builder
+            .addCase(signupUser.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(signupUser.fulfilled, (state, action) => {
+                state.user = action.payload;
+                state.loading = false;
+            })
+            .addCase(signupUser.rejected, (state, action) => {
+                state.error = action.payload;
+                state.loading = false;
+            });
+    },
 })
 
 export const { logout } = authSlice.actions;

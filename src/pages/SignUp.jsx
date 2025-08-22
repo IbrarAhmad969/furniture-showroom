@@ -4,10 +4,12 @@ import SocialAuthButton from "../components/auth/SocialAuthButton";
 import AuthForm from "../components/auth/AuthForm";
 import { useDispatch, useSelector } from "react-redux";
 import { signupUser } from "../state/features/auth/authSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -17,7 +19,7 @@ const Signup = () => {
       label: "Full Name",
       placeholder: "John Doe",
       type: "text",
-      name: "fullname",
+      name: "name",
     },
     {
       label: "Email",
@@ -37,16 +39,43 @@ const Signup = () => {
       type: "password",
       name: "confirmPassword",
     },
+    {
+      label: "Role",
+      placeholder: "Wholesaler, Shopkeeper, Retailer ... ",
+      type: "text",
+      name: "role",
+    },
+    {
+      label: "Avatar",
+      type: "file",
+      name: "avatar",
+      accept: "image/png,image/jpeg,image/webp",
+    },
   ];
 
   useEffect(() => {
     if (user) {
       navigate("/");
     }
-  }, [user]);
+  }, [user, navigate]);
 
-  const handleSubmit = ({ email, password }) => {
-    dispatch(signupUser({ email, password }));
+  const handleSubmit = (data) => {
+    if (data.password !== data.confirmPassword) {
+      alert("Passwords do not Match");
+      return;
+    }
+
+    const file = data.avatar?.[0] || null; 
+
+    dispatch(
+      signupUser({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        role: data.role,
+        avatar: file,
+      })
+    );
   };
 
   return (

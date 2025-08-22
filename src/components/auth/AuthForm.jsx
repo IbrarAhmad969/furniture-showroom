@@ -1,7 +1,10 @@
 import { useForm } from "react-hook-form";
 import Textfield from "../form/Textfield";
+import { input } from "framer-motion/client";
+import { useState } from "react";
 
 const AuthForm = ({ fields, buttonText, onSubmit, loading }) => {
+  const [avatar, setAvatar] = useState(null);
   const {
     register,
     handleSubmit,
@@ -10,8 +13,10 @@ const AuthForm = ({ fields, buttonText, onSubmit, loading }) => {
   return (
     <form className="mt-10" onSubmit={handleSubmit(onSubmit)}>
       {fields.map((field, i) => (
-        <div key={i} className="mb-4">
-          <label>{field.label}</label>
+        <div key={field.name} className="mb-4">
+          <label className="block text-sm font-medium mb-1">
+            {field.label}
+          </label>
           <Textfield
             register={register}
             error={errors[field.name]}
