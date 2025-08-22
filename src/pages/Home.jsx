@@ -1,14 +1,14 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import AboutCard from "./AboutCard";
 import Button from "../components/buttons/Button";
 import FooterGrid from "../components/footer/FooterGrid";
 import Subscribe from "../components/footer/Subscribe";
 import Products from "../components/Products";
 import SearchContext from "../context/SearchContext";
+import AuthContext from "../context/AuthContext";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
-import Search from "../components/Search";
 
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
@@ -18,6 +18,10 @@ const Home = () => {
   const rightBoxRef = useRef();
   const scrollRef = useRef();
   const scrollRefTwo = useRef();
+
+  const {user} = useContext(AuthContext);
+
+
 
   const logoName = [
     {
@@ -229,6 +233,8 @@ const Home = () => {
         sm:flex-col sm:items-start sm:justify-start sm:gap-10 mt-20
         "
                 >
+                  <p className="text-lg font-bold tracking-wide sm:text-2xl sm:font-light">Welcome Back {user.name}</p>
+
                   <p
                     className={`text-lg font-bold tracking-wide sm:text-2xl sm:font-light`}
                   >

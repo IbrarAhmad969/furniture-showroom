@@ -44,8 +44,8 @@ const Login = () => {
       localStorage.setItem("refreshToken", refreshToken);
 
       loginUser(user);
-      
-      console.log(`Welcome Dear ${user}`);
+
+      console.log(`Welcome Dear ${user.name}`);
 
       navigate("/");
     } catch (error) {
