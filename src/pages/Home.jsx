@@ -233,7 +233,7 @@ const Home = () => {
         sm:flex-col sm:items-start sm:justify-start sm:gap-10 mt-20
         "
                 >
-                  <p className="text-lg font-bold tracking-wide sm:text-2xl sm:font-light">Welcome Back {user.name}</p>
+                  <p className="text-lg font-bold tracking-wide sm:text-2xl sm:font-light">Welcome Back {user?.name}</p>
 
                   <p
                     className={`text-lg font-bold tracking-wide sm:text-2xl sm:font-light`}
