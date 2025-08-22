@@ -2,13 +2,14 @@ import AuthLayout from "../components/auth/AuthLayout";
 import AuthHeader from "../components/auth/AuthHeader";
 import SocialAuthButton from "../components/auth/SocialAuthButton";
 import AuthForm from "../components/auth/AuthForm";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase/firebase";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
+import api from "../api/api";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
+  const { user, logoutUser, loginUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -31,14 +32,27 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        data.email,
-        data.password
-      );
+      const response = await api.post("/loginUser", data, {
+        withCredentials: true, // Cookies.
+      });
+
+      const { user, accessToken, refreshToken } = response.data.data;
+
+      // For Mobile
+
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+
+      loginUser(user);
+      
+      console.log(`Welcome Dear ${user}`);
+
       navigate("/");
     } catch (error) {
-      console.log("Login Error: ", error.message);
+      console.log(
+        "Login Error: ",
+        error.response?.data?.message || error.message
+      );
       alert("Invalid Credential");
     } finally {
       setLoading(false);

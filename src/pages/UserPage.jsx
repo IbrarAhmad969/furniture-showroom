@@ -38,7 +38,7 @@ const UserPage = () => {
   return (
     <div className="mt-16 px-6">
       <h1 className="text-3xl font-bold mb-8 text-center">
-       Dashboard – All Users
+       Dashboard - All Users
       </h1>
 
       {/* Desktop Table */}

@@ -7,11 +7,15 @@ const api = axios.create({
     }
 });
 
-api.interceptors.response.use((res)=> res, (err)=>{
-    if(err.response){
-        return Promise.reject(err.response.data?.message || "Server Error")
+api.interceptors.response.use(
+    (res) => res,
+
+    (err) => {
+        if (err.response) {
+            return Promise.reject(err.response.data?.message || "Server Error")
+        }
+        return Promise.reject("Network Error");
     }
-    return Promise.reject("Network Error");
-})
+)
 
 export default api;

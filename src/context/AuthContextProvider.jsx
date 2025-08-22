@@ -1,31 +1,34 @@
-import AuthContext from './AuthContext'
-import { onAuthStateChanged, signOut } from 'firebase/auth'
-import { auth } from '../firebase/firebase'
-import { useEffect, useState } from 'react'
+import AuthContext from "./AuthContext";
+import { useEffect, useState } from "react";
 
-
-const AuthContextProvider = ({children}) => {
-
+const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  useEffect(()=>{
-    const unsubscribe = onAuthStateChanged(auth, (currentUser)=>{
-      setUser(currentUser);
-    })
-
-    return () => unsubscribe();
-
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
   }, []);
 
-  const logout = () => {
-    signOut(auth);
+  const loginUser = (userData) => {
+    setUser(userData);
+    localStorage.setItem("user", JSON.stringify(userData));
   }
 
-  return (
-    <AuthContext.Provider value={{user, logout}}>
-        {children}
-    </AuthContext.Provider>
-  )
-}
+  const logoutUser = () => {
+    setUser(null);
+    localStorage.removeItem("user");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
 
-export default AuthContextProvider
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, logoutUser, loginUser }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export default AuthContextProvider;

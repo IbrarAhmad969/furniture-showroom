@@ -12,6 +12,8 @@ import ViewProductDetail from "../pages/ViewProductDetail";
 import FurnitureBlog from "../pages/FurnitureBlog";
 import UserPage from "../pages/UserPage";
 
+import AnimatedPage from "../pages/AnimatedPage";
+
 const Layout = () => (
   <>
     <NavBar />
@@ -62,6 +64,10 @@ let routers = createBrowserRouter([
       {
         path: "/userPage",
         element: <UserPage />,
+      },
+      {
+        path: "/animatePage",
+        element: <AnimatedPage />,
       },
      
     ],
