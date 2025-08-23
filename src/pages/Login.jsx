@@ -32,9 +32,11 @@ const Login = () => {
     setLoading(true);
 
     try {
-      
       const response = await api.post("/loginUser", data, {
         withCredentials: true, // Cookies.
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
 
       const { user, accessToken, refreshToken } = response.data.data;
