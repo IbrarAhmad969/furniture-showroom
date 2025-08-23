@@ -224,7 +224,7 @@ const Home = () => {
         <>
           <div>
             <main className="w-full min-h-screen p-10 pt-[60px] overflow-x-hidden">
-              <section className="flex flex-col sm:flex-row sm:items-start sm:justify-start h-full ">
+              <section className="flex flex-col sm:flex-row sm:items-start sm:justify-between h-full ">
                 {/* left Div */}
 
                 <div
