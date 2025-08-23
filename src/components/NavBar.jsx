@@ -68,7 +68,7 @@ const NavBar = () => {
 
   const handleLogOut = async () => {
     try {
-      await api.post("/logout");
+      await api.post("/logout", {}, { withCredentials: true });
       logoutUser();
       navigate("/");
       setShowDropDown(false);
