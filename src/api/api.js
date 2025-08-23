@@ -3,8 +3,9 @@ import axios from "axios";
 const api = axios.create({
     baseURL: import.meta.env.VITE_REACT_APP_API_URL,
     headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json", // ✅ use JSON for login
     },
+    withCredentials: true
 });
 
 api.interceptors.response.use(

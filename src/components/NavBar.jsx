@@ -15,19 +15,19 @@ import { useSelector } from "react-redux";
 import { selectCartTotal } from "../state/features/cart/cartSlice";
 import { useLocation } from "react-router-dom";
 import SearchContext from "../context/SearchContext";
+import AuthContext from "../context/AuthContext";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { LogsIcon, PersonStanding, UserRound } from "lucide-react";
-import { BiChild } from "react-icons/bi";
+import { UserRound } from "lucide-react";
+import api from "../api/api";
 
 gsap.registerPlugin(useGSAP);
 
 const NavBar = () => {
+  // By Navigating, Search box carried a value, clear it.
 
-  // By Navigating, Search box carried a value, clear it. 
-  
-  const {searchTerm, setSearchTerm } = useContext(SearchContext);
+  const { searchTerm, setSearchTerm } = useContext(SearchContext);
 
   const navBarRef = useRef();
   const navBarLinks = useRef([]);
@@ -38,6 +38,8 @@ const NavBar = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const dropDownRef = useRef(null);
   const { theme, toggleTheme } = useContext(ThemeContext);
+
+  const { user, logoutUser } = useContext(AuthContext);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -54,15 +56,29 @@ const NavBar = () => {
 
   const location = useLocation();
 
-  useEffect(()=>{
+  useEffect(() => {
     setSearchTerm("");
-  }, [location])
-
+    setShowDropDown(false);
+  }, [location]);
 
   useEffect(() => {
     // whenever route changes, close sidebar
     setMobileMenu(false);
   }, [location]);
+
+  const handleLogOut = async () => {
+    console.log(`${user}`);
+    try {
+      await api.post("/logout", {});
+      logoutUser();
+      console.log(`${user}`);
+
+      navigate("/");
+      setShowDropDown(false);
+    } catch (error) {
+      alert(`User can't be logout ${error?.message}`);
+    }
+  };
 
   useGSAP(() => {
     gsap.from(navBarRef.current, {
@@ -170,56 +186,60 @@ const NavBar = () => {
               } absolute pt-3 pb-2 right-0 mt-2 w-30 rounded-md shadow-md z-10  `}
               style={{ top: "100%", right: "0%", position: "absolute" }}
             >
-              <button
-                className="dropdown-btn text-left"
-                onClick={() => {
-                  navigate("/login");
-                  setShowDropDown(false);
-                }}
-              >
-                <div className="flex items-center gap-2">
-                  <MdPerson />
-                  Login
-                </div>
-              </button>
+              {!user ? (
+                <>
+                  <button
+                    className="dropdown-btn text-left"
+                    onClick={() => {
+                      navigate("/login");
+                      setShowDropDown(false);
+                    }}
+                  >
+                    <div className="flex items-center gap-2">
+                      <MdPerson />
+                      Login
+                    </div>
+                  </button>
 
-              <button
-                className="dropdown-btn text-left"
-                onClick={() => {
-                  navigate("/signup");
-                  setShowDropDown(false);
-                }}
-              >
-                <div className="flex items-center gap-2">
-                  <MdOutlinePersonAdd />
-                  Sign up
-                </div>
-              </button>
+                  <button
+                    className="dropdown-btn text-left"
+                    onClick={() => {
+                      navigate("/signup");
+                      setShowDropDown(false);
+                    }}
+                  >
+                    <div className="flex items-center gap-2">
+                      <MdOutlinePersonAdd />
+                      Sign up
+                    </div>
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    className="dropdown-btn text-left"
+                    onClick={() => {
+                      navigate("/userPage");
+                      setShowDropDown(false);
+                    }}
+                  >
+                    <div className="flex items-center gap-2">
+                      <UserRound className="cursor-pointer" size={18} />
+                      Profile
+                    </div>
+                  </button>
 
-              <button
-                className="dropdown-btn text-left"
-                onClick={() => {
-                  navigate("/");
-                  setShowDropDown(false);
-                }}
-              >
-                <div className="flex items-center gap-2">
-                  <RiLogoutCircleLine />
-                  Logout
-                </div>
-              </button>
-              <button
-                className="dropdown-btn text-left"
-                onClick={() => {
-                  navigate("/userPage");
-                  setShowDropDown(false);
-                }}
-              >
-                <div className="flex items-center gap-2">
-                  <UserRound className="cursor-pointer" size={18}/>
-                  Profile
-                </div>
-              </button>
+                  <button
+                    className="dropdown-btn text-left"
+                    onClick={handleLogOut}
+                  >
+                    <div className="flex items-center gap-2">
+                      <RiLogoutCircleLine />
+                      Logout
+                    </div>
+                  </button>
+                </>
+              )}
             </div>
           )}
           <button onClick={() => navigate("/cart")} className="relative">

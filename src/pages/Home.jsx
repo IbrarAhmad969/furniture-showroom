@@ -10,6 +10,8 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
 
+import { motion } from "framer-motion";
+
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,9 +21,7 @@ const Home = () => {
   const scrollRef = useRef();
   const scrollRefTwo = useRef();
 
-  const {user} = useContext(AuthContext);
-
-
+  const { user } = useContext(AuthContext);
 
   const logoName = [
     {
@@ -224,22 +224,36 @@ const Home = () => {
         <>
           <div>
             <main className="w-full min-h-screen p-10 pt-[60px] overflow-x-hidden">
-              <section className="flex flex-col sm:flex-row sm:items-start sm:justify-between h-full ">
+              <section className="flex flex-col sm:flex-row sm:items-start sm:justify-start h-full ">
                 {/* left Div */}
 
                 <div
                   ref={leftBoxRef}
-                  className="flex flex-col items-center gap-10
-        sm:flex-col sm:items-start sm:justify-start sm:gap-10 mt-20
+                  className="flex flex-col justify-start items-center gap-10
+        sm:flex-col sm:items-start sm:justify-around sm:gap-10 mt-10
         "
                 >
-                  <p className="text-lg font-bold tracking-wide sm:text-2xl sm:font-light">Welcome Back {user?.name}</p>
+                  <>
+                    {user ? (
+                      <motion.p
+                        initial={{ opacity: 0, x: 500 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.2, duration: 0.9 }}
+                        className="text-start text-lg font-bold tracking-wide sm:text-4xl sm:font-light mb-10"
+                      >
+                        Welcome Back
+                        <span className="gradient-text"> {user?.name}</span>
+                      </motion.p>
+                    ) : (
+                      ""
+                    )}
+                    <p
+                      className={`text-lg tracking-wide sm:text-2xl font-light`}
+                    >
+                      Interior Needs
+                    </p>
+                  </>
 
-                  <p
-                    className={`text-lg font-bold tracking-wide sm:text-2xl sm:font-light`}
-                  >
-                    Interior Needs
-                  </p>
                   <h1 className="text-center text-2xl sm:text-4xl font-bold  sm:w-100 sm:text-start">
                     Various{" "}
                     <span className="text-blue-500">new collections</span> image
