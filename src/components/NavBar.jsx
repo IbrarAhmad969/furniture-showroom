@@ -67,12 +67,9 @@ const NavBar = () => {
   }, [location]);
 
   const handleLogOut = async () => {
-    console.log(`${user}`);
     try {
       await api.post("/logout", {});
       logoutUser();
-      console.log(`${user}`);
-
       navigate("/");
       setShowDropDown(false);
     } catch (error) {
