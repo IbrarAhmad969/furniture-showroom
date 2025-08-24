@@ -51,11 +51,12 @@ const Textfield = ({
             key={inputKey}
             id={textFieldValue}
             type={inpType}
-            className="hidden"
-            {...register(`${textFieldValue}`, {
+            {...register(textFieldValue, {
               required: `${inpType} is Required`,
+              onChange: (e) => {
+                handleFileChange(e);
+              },
             })}
-            onChange={handleFileChange}
           />
           <label
             className="block w-full cursor-pointer rounded-lg border border-dashed border-gray-400 bg-gray-50 p-4 text-center text-gray-700 hover:bg-gray-200 dark:bg-zinc-700 dark:text-white dark:hover:bg-zinc-600"

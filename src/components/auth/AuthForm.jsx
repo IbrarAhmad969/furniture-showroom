@@ -4,7 +4,7 @@ import { input } from "framer-motion/client";
 import { useState } from "react";
 
 const AuthForm = ({ fields, buttonText, onSubmit, loading }) => {
-  const [avatar, setAvatar] = useState(null);
+
   const {
     register,
     handleSubmit,

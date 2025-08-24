@@ -12,15 +12,22 @@ export const signupUser = createAsyncThunk(
             formData.append("email", email);
             formData.append("password", password);
 
-            if (avatar) formData.append("avatar", avatar);
+            if (avatar) {
+                console.log("Avatar being appended:", avatar);
+                formData.append("avatar", avatar);
+            }
             const response = await api.post("/createUser",
-                formData
+                formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            }
             )
-
             return response.data.data;
         } catch (error) {
-
-            return thunkAPI.rejectWithValue(error.message);
+            return thunkAPI.rejectWithValue(
+                error.response?.data || error.message || "Signup failed"
+            );
         }
     }
 );

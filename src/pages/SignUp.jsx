@@ -60,6 +60,7 @@ const Signup = () => {
   }, [user, navigate]);
 
   const handleSubmit = (data) => {
+    
     if (data.password !== data.confirmPassword) {
       alert("Passwords do not Match");
       return;
