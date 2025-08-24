@@ -14,12 +14,7 @@ export const signupUser = createAsyncThunk(
 
             if (avatar) formData.append("avatar", avatar);
             const response = await api.post("/createUser",
-                formData,
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    },
-                }
+                formData
             )
 
             return response.data.data;
