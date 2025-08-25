@@ -63,7 +63,7 @@ const Signup = () => {
       setTimeout(() => {
         dispatch(resetAuth());
         navigate("/login", { replace: true });
-      }, 2000); // 2s delay before redirect
+      }, 2000); 
     }
   }, [user, navigate, dispatch]);
 
