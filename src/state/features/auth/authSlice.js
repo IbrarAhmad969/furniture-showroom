@@ -16,7 +16,7 @@ export const signupUser = createAsyncThunk(
                 formData.append("avatar", avatar);
             }
             const response = await api.post("/createUser",
-                formData, { // force to set the headers for images
+                formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -43,6 +43,11 @@ const authSlice = createSlice({
             state.user = null,
                 state.loading = false,
                 state.error = null
+        },
+        resetAuth: (state) => {
+            state.user = null,
+            state.loading = false;
+            state.error = null;
         }
     },
     extraReducers: (builder) => {
@@ -62,5 +67,5 @@ const authSlice = createSlice({
     },
 })
 
-export const { logout } = authSlice.actions;
+export const { logout, resetAuth } = authSlice.actions;
 export default authSlice.reducer;

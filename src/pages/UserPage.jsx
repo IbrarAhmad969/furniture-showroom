@@ -7,6 +7,7 @@ const UserPage = () => {
   const [error, setErrors] = useState("");
 
   useEffect(() => {
+    console.log(`API url : ${import.meta.env.VITE_REACT_APP_API_URL}`);
     const fetchedUsers = async () => {
       try {
         setLoading(true);
