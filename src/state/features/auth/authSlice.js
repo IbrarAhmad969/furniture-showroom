@@ -13,11 +13,10 @@ export const signupUser = createAsyncThunk(
             formData.append("password", password);
 
             if (avatar) {
-                console.log("Avatar being appended:", avatar);
                 formData.append("avatar", avatar);
             }
             const response = await api.post("/createUser",
-                formData, {
+                formData, { // force to set the headers for images
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
