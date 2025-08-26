@@ -31,6 +31,9 @@ const NavBar = () => {
 
   const navBarRef = useRef();
   const navBarLinks = useRef([]);
+
+  const touchEndX = useRef(0);
+
   const total = useSelector(selectCartTotal);
 
   const [showDropDown, setShowDropDown] = useState(false);
@@ -74,6 +77,12 @@ const NavBar = () => {
       setShowDropDown(false);
     } catch (error) {
       alert(`User can't be logout ${error?.message}`);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current - touchEndX.current > 50) {
+      setMobileMenu(false);
     }
   };
 
@@ -128,6 +137,7 @@ const NavBar = () => {
         <div>
           <>
             <div
+              onTouchEnd={handleTouchEnd}
               ref={dropDownRef}
               className={`${
                 theme === "light" ? "bg-white" : "bg-zinc-900"
