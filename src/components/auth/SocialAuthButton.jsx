@@ -18,7 +18,9 @@ const SocialAuthButton = () => {
         const code = authResult.code;
         console.log(code);
 
-        const result = await api.get(`/google?code=${code}`);
+        const result = await api.get(`/google?code=${code}`, {
+          withCredentials: true
+        });
 
         console.log("now api.get method executed ")
 
