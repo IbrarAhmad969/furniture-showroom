@@ -126,28 +126,31 @@ const NavBar = () => {
 
       <div>
         <div>
-          {mobileMenu && (
-            <>
-              <div
-                ref={dropDownRef}
-                className={`${
-                  theme === "light" ? "bg-white" : "bg-zinc-900"
-                } fixed top-[60px] left-0 w-[80vw] max-w-[250px] h-[calc(100vh-60px)] px-4 py-6 shadow-lg transition-all duration-300 z-50 sm580:hidden`}
+          <>
+            <div
+              ref={dropDownRef}
+              className={`${
+                theme === "light" ? "bg-white" : "bg-zinc-900"
+              } fixed top-[60px] left-0 w-[80vw] max-w-[250px] h-[calc(100vh-60px)] px-4 py-8 universal-shadow transform transition-all duration-900 ease-in-out z-50 sm580:hidden
+                ${
+                  mobileMenu
+                    ? "translate-x-0 opacity-100"
+                    : "-translate-x-full opacity-0"
+                }`}
+            >
+              <button
+                className="absolute top-3 right-4 bg-black text-white universal-shadow border px-3 rounded-2xl dark:text-gray-300"
+                onClick={() => setMobileMenu(false)}
               >
-                <button
-                  className="absolute top-3 right-4 bg-black text-white universal-shadow border px-3 rounded-2xl dark:text-gray-300"
-                  onClick={() => setMobileMenu(false)}
-                >
-                  ✕
-                </button>
-                <NavLinks
-                  mobile={true}
-                  linkRef={navBarLinks}
-                  onLinkClicked={() => setMobileMenu(false)}
-                />
-              </div>
-            </>
-          )}
+                ✕
+              </button>
+              <NavLinks
+                mobile={true}
+                linkRef={navBarLinks}
+                onLinkClicked={() => setMobileMenu(false)}
+              />
+            </div>
+          </>
         </div>
       </div>
 

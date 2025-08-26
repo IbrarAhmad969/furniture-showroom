@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { X } from "lucide-react";
 
 const Textfield = ({
@@ -12,13 +12,14 @@ const Textfield = ({
   const [preview, setPreview] = useState(null);
   const [inputKey, setInputKey] = useState(Date.now()); // 🔑 force re-render input
 
-  const fileInputRef = useRef(null);
-
   const handleFileChange = (e) => {
+
     const file = e.target.files[0];
+
     if (!file) return;
 
     const reader = new FileReader();
+    
 
     setProgress(0);
 
