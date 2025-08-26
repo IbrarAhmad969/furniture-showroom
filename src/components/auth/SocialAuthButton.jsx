@@ -13,11 +13,14 @@ const SocialAuthButton = () => {
 
   const responseGoogle = async (authResult) => {
     try {
+      console.log("inside try block... ")
       if (authResult["code"]) {
         const code = authResult.code;
         console.log(code);
 
         const result = await api.get(`/google?code=${code}`);
+
+        console.log("now api.get method executed ")
 
         const { user, accessToken, refreshToken } = result.data.data;
 
