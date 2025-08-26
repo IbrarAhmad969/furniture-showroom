@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import Textfield from "../form/Textfield";
-import { input } from "framer-motion/client";
-import { useState } from "react";
+
 
 const AuthForm = ({ fields, buttonText, onSubmit, loading }) => {
 

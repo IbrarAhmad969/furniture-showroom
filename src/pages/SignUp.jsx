@@ -1,15 +1,13 @@
 import AuthLayout from "../components/auth/AuthLayout";
 import AuthHeader from "../components/auth/AuthHeader";
-import SocialAuthButton from "../components/auth/SocialAuthButton";
 import AuthForm from "../components/auth/AuthForm";
-
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-
 import { useDispatch, useSelector } from "react-redux";
 import { signupUser, resetAuth } from "../state/features/auth/authSlice";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import GoogleLogin from "./GoogleLogin";
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -63,7 +61,7 @@ const Signup = () => {
       setTimeout(() => {
         dispatch(resetAuth());
         navigate("/login", { replace: true });
-      }, 2000); 
+      }, 2000);
     }
   }, [user, navigate, dispatch]);
 
@@ -94,8 +92,7 @@ const Signup = () => {
         linkText="Login here"
         linkHref="/login"
       />
-      <SocialAuthButton />
-
+      <GoogleLogin />
       {/* ✅ Success Alert */}
       <Snackbar
         open={openSnakeBar}
@@ -104,11 +101,11 @@ const Signup = () => {
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert severity="success" variant="filled" sx={{ width: "100%" }}>
-           User registered successfully! Redirecting you to login...
+          User registered successfully! Redirecting you to login...
         </Alert>
       </Snackbar>
 
-         <Snackbar
+      <Snackbar
         open={Boolean(error)}
         autoHideDuration={3000}
         onClose={() => dispatch(resetAuth())}
