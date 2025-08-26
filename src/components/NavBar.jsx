@@ -31,6 +31,7 @@ const NavBar = () => {
 
   const navBarRef = useRef();
   const navBarLinks = useRef([]);
+  const touchStartX = useRef(0);
 
   const touchEndX = useRef(0);
 
@@ -85,6 +86,12 @@ const NavBar = () => {
       setMobileMenu(false);
     }
   };
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
 
   useGSAP(() => {
     gsap.from(navBarRef.current, {
@@ -137,6 +144,8 @@ const NavBar = () => {
         <div>
           <>
             <div
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
               ref={dropDownRef}
               className={`${
