@@ -24,10 +24,7 @@ const SocialAuthButton = () => {
 
         console.log("now api.get method executed ")
 
-        const { user, accessToken, refreshToken } = result.data.data;
-
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("refreshToken", refreshToken);
+        const { user} = result.data.data;
 
         loginUser(user);
 
