@@ -13,18 +13,18 @@ const SocialAuthButton = () => {
 
   const responseGoogle = async (authResult) => {
     try {
-      console.log("inside try block... ")
+    
       if (authResult["code"]) {
         const code = authResult.code;
-        console.log(code);
-
         const result = await api.get(`/google?code=${code}`, {
           withCredentials: true
         });
 
-        console.log("now api.get method executed ")
 
-        const { user} = result.data.data;
+        const {user} = result.data.data;
+
+        console.log("User object Received .... ", user);
+        
 
         loginUser(user);
 
@@ -40,7 +40,7 @@ const SocialAuthButton = () => {
       console.log(error);
     }
   };
-  const googleLogin = useGoogleLogin({
+  const googleLogin = useGoogleLogin({ 
     onSuccess: responseGoogle,
     onError: responseGoogle,
     flow: "auth-code",
