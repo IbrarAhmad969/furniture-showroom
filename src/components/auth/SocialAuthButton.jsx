@@ -7,31 +7,24 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SocialAuthButton = () => {
-
   const { loginUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const responseGoogle = async (authResult) => {
     try {
-    
       if (authResult["code"]) {
         const code = authResult.code;
         const result = await api.get(`/google?code=${code}`, {
-          withCredentials: true
+          withCredentials: true,
         });
 
+        const { user, accessToken, refreshToken } = result.data.data;
 
-        const {user} = result.data.data;
-
-        console.log("User object Received .... ", user);
-        
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
 
         loginUser(user);
-
-        console.log(`Google login successful. Welcome ${user.name}`);
-
         navigate("/");
-        
       } else {
         console.log(authResult);
         throw new Error("authResult");
@@ -40,7 +33,7 @@ const SocialAuthButton = () => {
       console.log(error);
     }
   };
-  const googleLogin = useGoogleLogin({ 
+  const googleLogin = useGoogleLogin({
     onSuccess: responseGoogle,
     onError: responseGoogle,
     flow: "auth-code",
