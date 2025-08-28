@@ -9,7 +9,6 @@ import GoogleLogin from "./GoogleLogin";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
-  const [googleUser, setGoogleUser] = useState();
 
   const { loginUser } = useContext(AuthContext);
 
