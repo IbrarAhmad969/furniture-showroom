@@ -73,12 +73,12 @@ const NavBar = () => {
   const handleLogOut = async () => {
     try {
       setIsLoggingOut(true);
-      await api.post("/logout", {}, { withCredentials: true });
+      await api.post("/logout", {}, { withCredentials: true }).catch(()=>{});
       logoutUser();
       navigate("/");
       setShowDropDown(false);
     } catch (error) {
-      alert(`User can't be logout ${error?.message}`);
+      alert(`User can't be logout: ${error?.response?.data?.message || error?.message || "Unknown error"}`);
     } finally {
       setIsLoggingOut(false);
     }
