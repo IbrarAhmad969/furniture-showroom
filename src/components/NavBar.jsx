@@ -21,6 +21,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { UserRound } from "lucide-react";
 import api from "../api/api";
+import SideBar from "./SideBar";
 
 gsap.registerPlugin(useGSAP);
 
@@ -73,12 +74,16 @@ const NavBar = () => {
   const handleLogOut = async () => {
     try {
       setIsLoggingOut(true);
-      await api.post("/logout", {}, { withCredentials: true }).catch(()=>{});
+      await api.post("/logout", {}, { withCredentials: true }).catch(() => {});
       logoutUser();
       navigate("/");
       setShowDropDown(false);
     } catch (error) {
-      alert(`User can't be logout: ${error?.response?.data?.message || error?.message || "Unknown error"}`);
+      alert(
+        `User can't be logout: ${
+          error?.response?.data?.message || error?.message || "Unknown error"
+        }`
+      );
     } finally {
       setIsLoggingOut(false);
     }
@@ -127,7 +132,7 @@ const NavBar = () => {
         ref={navBarRef}
         className={`universal-shadow ${
           theme == "dark" ? "nav-shadow" : ""
-        } fixed top-0 left-0 right-0 px-4 sm:px-10 h-[60px] z-50 bg-white dark:bg-zinc-900 flex items-center justify-between`}
+        } fixed top-0 left-0 right-0 px-4 sm:px-10 h-[60px] z-50 bg-white dark:bg-zinc-900 flex items-center justify-between `}
       >
         {/* logo */}
 
@@ -135,7 +140,7 @@ const NavBar = () => {
           {/* Mobile Menu Button - only visible on small screens */}
           <button
             onClick={() => setMobileMenu(!mobileMenu)}
-            className="sm580:hidden"
+            className="sm:hidden"
           >
             <GiHamburgerMenu size={24} />
           </button>
@@ -153,39 +158,21 @@ const NavBar = () => {
         <div>
           <div>
             <>
-              <div
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
-                onTouchEnd={handleTouchEnd}
-                ref={dropDownRef}
-                className={`${
-                  theme === "light" ? "bg-white" : "bg-zinc-900"
-                } fixed top-[60px] left-0 w-[80vw] max-w-[250px] h-[calc(100vh-60px)] px-4 py-8 universal-shadow transform transition-all duration-900 ease-in-out z-50 sm580:hidden
-                ${
-                  mobileMenu
-                    ? "translate-x-0 opacity-100"
-                    : "-translate-x-full opacity-0"
-                }`}
-              >
-                <button
-                  className="absolute top-3 right-4 bg-black text-white universal-shadow border px-3 rounded-2xl dark:text-gray-300"
-                  onClick={() => setMobileMenu(false)}
-                >
-                  ✕
-                </button>
-                <NavLinks
-                  mobile={true}
-                  linkRef={navBarLinks}
-                  onLinkClicked={() => setMobileMenu(false)}
-                />
-              </div>
+              <SideBar
+                handleTouchEnd={handleTouchEnd}
+                dropDownRef={dropDownRef}
+                mobileMenu={mobileMenu} // pass the state, not `true`
+                setMobileMenu={setMobileMenu} // pass the setter, not `true`
+                mobile={true} // here you can still force true if sidebar is mobile-only
+                linkRef={navBarLinks} // pass the actual ref from NavBar
+              />
             </>
           </div>
         </div>
 
         {/* Nav Links  */}
 
-        <div className="hidden sm580:flex absolute left-1/2 transform -translate-x-1/2">
+        <div className="hidden sm:flex absolute left-1/2 transform -translate-x-1/2">
           <NavLinks mobile={false} linkRef={navBarLinks} />
         </div>
 

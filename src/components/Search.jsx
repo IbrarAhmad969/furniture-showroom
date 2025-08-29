@@ -36,7 +36,7 @@ const Search = ({ mobile }) => {
       } search-wrapper`}
     >
       {isSearchOpen ? (
-        <div className="flex items-center relative">
+        <div className="flex items-center relative p-3">
           <input
             ref={inputRef}
             type="text"
@@ -45,7 +45,7 @@ const Search = ({ mobile }) => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onBlur={handleInputBlur}
-            className={`absolute right-0 top-1/2 -translate-y-1/2 min-w-[10rem] max-w-[12rem] w-full px-3 py-1 rounded-md border border-white bg-white text-black shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300 ease-in-out ${
+            className={`absolute right-0 top-1/2 -translate-y-1/2 min-w-[10rem] max-w-[13rem] w-full px-3 py-1 rounded-md border border-white bg-white text-black shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300 ease-in-out ${
               mobile ? "left-0 top-1.5 right-auto" : ""
             }`}
           />
