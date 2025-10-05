@@ -91,12 +91,12 @@ const Shop = () => {
           Evaluate Your Space
         </h1>
 
-        <div className="pt-5 flex gap-3 overflow-x-auto no-scrollbar">
+        <div className="pt-5 flex gap-3 overflow-x-auto no-scrollbar ">
           {buttons.map((buttonText, index) => (
             <button
               key={index}
               onClick={() => setIsActive(buttonText)}
-              className={`flex-shrink-0 px-4 py-2 rounded-lg border transition-all duration-200
+              className={`flex-shrink-0 px-4 py-2 rounded-lg border transition-all duration-200 cursor-pointer
            ${
              active === buttonText
             ? "bg-amber-500 text-white border-amber-500"
